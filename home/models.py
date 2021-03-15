@@ -11,7 +11,7 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
-    def __str__():
+    def __str__(self):
         return self.name
 
 
@@ -28,9 +28,9 @@ class Product(models.Model):
     class Meta:
         ordering = ('-upload_time',)
 
-    def save(self):
-        self.slug = slugify(self.title)
-        super(Product,self).save()
+    # def save(self):
+    #     self.slug = slugify(self.title)
+    #     super(Product,self).save()
 
     def __str__(self):
         return self.title

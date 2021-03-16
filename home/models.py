@@ -28,9 +28,9 @@ class Product(models.Model):
     class Meta:
         ordering = ('-upload_time',)
 
-    # def save(self):
-    #     self.slug = slugify(self.title)
-    #     super(Product,self).save()
+    def save(self):
+        self.slug = slugify(self.title)
+        super(Product,self).save()
 
     def __str__(self):
         return self.title

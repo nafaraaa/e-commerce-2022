@@ -1,5 +1,54 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 	<div class="jumbotron jumbotron-fluid">
 	</div>
+	<div class="konten container shadow">
+		<div class="row">
+			<div class="card kartu-1 col-sm-6">
+				<h2>Welcome To Shop</h2>
+			</div>
+			<div class="card kartu-2 col-sm-6">
+				<ul>
+					<li>
+						Lorem Ipsum
+					</li>
+					<li>
+						Lorem Ipsum2
+					</li>
+					<li>
+						Lorem Ipsum3
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 card kartu-3">
+				<h6 class="progress-title">Kepuasan</h6>
+				<div class="progress prog">
+				  	<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">70%</div>
+				</div>
+				<h6 class="progress-title">Rate Happy</h6>
+				<div class="progress prog">
+				  	<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 85%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">85%</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section class="section-content">
+		<div class="container">
+			<div class="row">
+			    <div class="col-md-4">
+			      	<div class="card bg-dark">
+			        <img src="{% static 'sample1.png' %}" class="card-img opacity">
+				        <div class="card-img-overlay text-white">
+				          	<h5 class="card-title">Apple Devices</h5>
+				          	<p class="card-text">This is a wider card with a text below</p>
+				          	<a href="#" class="btn btn-light">Discover</a>
+				        </div>
+			      	</div> 
+			    </div> <!-- End Card -->
+			</div>	
+		</div>
+	</section>
 {% endblock content %}

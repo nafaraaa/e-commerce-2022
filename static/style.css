@@ -3,16 +3,48 @@
 }
 
 .jumbotron-fluid{
-	margin-top: 50px;
 	background-image: url("skybg.png");
-	background-position: 0 0;
+	background-position: -100 0;
 	background-repeat: no-repeat;
 	min-height: 500px
 }
+.card {
+
+}
+
+.konten {
+	border-radius: 20px;
+	margin-top: -200px;
+	background-color: rgba(240,240,240,.8);
+	min-height: 250px;
+}
+.kartu-1{
+	padding: 15px;
+	background-color: rgba(240,240,240,.3);
+	border-radius: 20px 0px 0px 0px;
+}
+.kartu-2{
+	padding: 15px;
+	background-color: rgba(240,240,240,.3);
+	border-radius: 0px 20px 0px 0px;
+}
+.kartu-3{
+	padding: 15px;
+	background-color: rgba(240,240,240,.3);
+	border-radius: 0px 0px 20px 20px;
+}
 
 
+.section-content {
+	margin-top: 20px;
+	border-top: 7px solid #eee;
+	padding: 20px;
+}
 
-// Large devices (landscape monitor, 992px and up)
-@media (min-width: 992px) { 
+.progress {
+	background-color: white;
+}
 
+.progress-title{
+	margin-top: 10px;
 }

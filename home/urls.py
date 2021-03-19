@@ -3,5 +3,6 @@ from.views import HomeView
 
 app_name = 'homey'
 urlpatterns = [
-    path('',HomeView.as_view(),name='index'),
+    path('',HomeView.as_view(template_name='home/indexhome.html'),name='index'),
+    path('product',HomeView.as_view(),name='product'),
 ]

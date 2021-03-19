@@ -16,6 +16,16 @@ img{
     border-radius: 0.37rem;
 }
 
+.card-body {
+    background-size: cover;
+    position: relative;
+    z-index: 10;
+}
+
+.text-decoration-none{
+    color: white;
+}
+
 .section-content{
 	margin-top: 20px!important;
 	border-top: 7px solid #eee;
@@ -85,6 +95,8 @@ img{
 	background-color: rgba(240,240,240,.3);
 	border-radius: 0px 0px 20px 20px;
 }
+
+
 
 .card-product-grid .img-wrap {
     border-radius: 0.2rem 0.2rem 0 0;

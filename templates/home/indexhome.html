@@ -41,16 +41,17 @@
 			<h2 class="d-flex mx-auto"><a href="" class="link-href text-decoration-none">Kategori</a></h2>
 			<div class="row mt-4">
 			    {% for category in categories %}
-				    <div class="col-md-4 mt-2">
-				      	<div class="card bg-dark">
-				        <img src="{% static 'sample1.png' %}" class="card-img opacity">
-					        <div class="card-img-overlay text-white">
-					          	<h5 class="card-title">{{category.name}}</h5>
-					          	<p class="card-text">This is a wider card with a text below</p>
-					          	<a href="#" class="btn btn-light">Check Product</a>
-					        </div>
-				      	</div> 
-				    </div> <!-- End Card -->
+			    	<a href="#">
+					    <div class="col-sm-6 col-lg-4 col-mn-6 mt-2">
+					      	<div class="card bg-dark">
+					        <img src="{% static 'sample1.png' %}" class="card-img opacity">
+						        <div class="card-img-overlay text-white">
+						          	<h5 class="card-title"><a href="" class="text-decoration-none">{{category.name}}</a></h5>
+						          	<p class="card-text">Category Card</p>
+						        </div>
+					      	</div> 
+					    </div> <!-- End Card -->
+				    </a>
 			    {% endfor %}
 			</div>	
 		</div>
@@ -58,9 +59,9 @@
 	<section class="section-content"><!-- Section Product -->
 		<div class="container mt-4">
 			<article class="card best-product">
-				<header class="card-header">
+				<div class="card-header">
 					<h3>Best Product</h3>
-				</header>
+				</div>
 				<div class="card-body">
 			<div class="row">
 				{% for product in product_list %}
@@ -73,6 +74,7 @@
 								<a href="#" class="btn btn-primary btn-sm"> Add to cart </a>
 							</figcaption>
 						</figure>
+						<small><a href="#" class="link-href text-decoration-none">See Others..</a></small>
 					</div> <!-- col.// -->
 				{% endfor %}
 			</div> <!-- row .//  -->

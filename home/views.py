@@ -8,7 +8,6 @@ from django.views.generic import (
 class HomeView(ListView):
 	model = Product
 	category = Category.objects.all()
-	template_name = 'home/indexhome.html' 
 	extra_context = {
 		'categories':category
 	}

@@ -1,6 +1,23 @@
+body {
+    background-color: rgba(168, 166, 166,.35);
+}
+
+.bg{
+    background-color: rgba(0, 0, 0,0);
+}
+
+.under-nav {
+    margin-top: 63px;
+}
+
+.section-pagetop {
+    padding: 45px 0;
+}
+
 .tombol{
 	width: 42px;
 }
+
 img{
 	border-image-slice: all;
 }
@@ -24,6 +41,16 @@ img{
 
 .text-decoration-none{
     color: white;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 0;
+    margin-bottom: 0;
+    list-style: none;
+    background-color: rgb(0, 0, 0,0)!important;
+    border-radius: 0.37rem;
 }
 
 .section-content{

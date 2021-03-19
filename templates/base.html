@@ -13,8 +13,8 @@
 <body>
 	<nav class="navbar shadow fixed-top navbar-expand-sm navbar-light bg-light">
 		<div class="container">
-	  		<h2><a class="navbar-brand" href="#">Myshop</a></h2>
-	  		<a href="" class="text-decoration-none mr-auto" style="color:black;">Products</a>
+	  		<h2><a class="navbar-brand" href="{% url 'homey:index' %}">Myshop</a></h2>
+	  		<a href="{% url 'homey:product' %}" class="text-decoration-none mr-auto" style="color:black;">Products</a>
 	  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"></span>
 	  		</button>

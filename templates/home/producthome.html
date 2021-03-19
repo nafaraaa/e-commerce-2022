@@ -1,1 +1,26 @@
 {% extends "base.html" %}
+
+{% block content %}
+    <!-- ========================= SECTION PAGETOP ========================= -->
+    <section class="section-pagetop bg under-nav ">
+        <div class="container">
+            <h2 class="title-page">Category products</h2>
+            <nav>
+            <ol class="breadcrumb text-white">
+                <li class="breadcrumb-item"><a href="{% url 'homey:index' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products</li>
+            </ol>  
+            </nav>
+        </div> <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION INTRO END// ========================= -->
+
+    <section class="section-content">
+        <div class="container">
+            <div class="row mx-0 mt-2" style="height: 200px;">
+                
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    

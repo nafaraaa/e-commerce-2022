@@ -13,7 +13,6 @@ class HomeView(ListView):
 	}
 	def get_context_data(self):
 		context = super().get_context_data()
-		print(context)
 		self.kwargs.update(self.extra_context)
 		kwargs = self.kwargs
 		return context

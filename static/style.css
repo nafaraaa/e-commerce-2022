@@ -21,6 +21,7 @@ body {
 img{
 	border-image-slice: all;
 }
+
 .card {
     position: relative;
     display: flex;
@@ -39,9 +40,6 @@ img{
     z-index: 10;
 }
 
-.text-decoration-none{
-    color: white;
-}
 
 .breadcrumb {
     display: flex;
@@ -67,7 +65,6 @@ img{
 }
 
 .padding-y{
-	margin-top: 40px;
 	margin-bottom: 40px;
 }
 
@@ -96,10 +93,6 @@ img{
 .link-href:hover::after {
     transform: scaleX(1);
     transform-origin: left;
-}
-
-.card-header{
-    display: flex;
 }
 
 .konten {

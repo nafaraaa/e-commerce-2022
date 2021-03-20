@@ -42,7 +42,7 @@
 			<div class="row mt-4">
 			    {% for category in categories %}
 			    	<a href="#">
-					    <div class="col-sm-6 col-lg-4 col-mn-6 mt-2">
+					    <div class="col-sm-6 col-6 col-lg-4 mt-2">
 					      	<div class="card bg-dark">
 					        <img src="{% static 'sample1.png' %}" class="card-img opacity">
 						        <div class="card-img-overlay text-white">
@@ -59,14 +59,19 @@
 	<section class="section-content"><!-- Section Product -->
 		<div class="container mt-4">
 			<article class="card best-product">
-				<div class="card-header">
-					<h3>Best Product</h3>
+				<div class="card-header d-flex flex-column w-100">
+					<div class="d-flex justify-content-between align-items-center w-100">
+						<h3>Best Product</h3>
+						<a href="" class="text-decoration-none">
+							<span>See Others..</span>
+						</a>
+					</div>
 				</div>
 				<div class="card-body">
 			<div class="row">
 				{% for product in product_list %}
-					<div class="col-md-3 col-sm-6 kartu-produk">
-						<figure class="card card-product-grid  mb-3">
+					<div class="col-6 col-md-3 col-sm-6 kartu-produk">
+						<figure class="card card-product-grid mb-3">
 							<div class="img-wrap"> <img src="{{product.image_product.url}}" class='img-product d-flex mx-auto'> </div>
 							<figcaption class="info-wrap">
 								<a href="#" class="title text-truncate">{{product.title}}</a>
@@ -74,7 +79,6 @@
 								<a href="#" class="btn btn-primary btn-sm"> Add to cart </a>
 							</figcaption>
 						</figure>
-						<small><a href="{% url 'homey:product' %}" class="link-href text-decoration-none">See Others..</a></small>
 					</div> <!-- col.// -->
 				{% endfor %}
 			</div> <!-- row .//  -->

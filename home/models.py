@@ -24,9 +24,7 @@ class Product(models.Model):
     upload_time = models.DateField(auto_now_add=True)
     on_stock = models.BooleanField(default=True)
     slug = models.SlugField(blank= True)
-    
-    class Meta:
-        ordering = ('-upload_time',)
+
 
     def save(self):
         self.slug = slugify(self.title)

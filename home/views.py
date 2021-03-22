@@ -14,10 +14,24 @@ class HomeView(ListView):
 		'categories':category
 	}
 
+# next(iter(request)) untuk mendapatkan key pertama di dictionary
+
 	def get_queryset(self):
-		if len(self.request.GET) != 0:
-			self.queryset = Product.objects.filter(category_id=self.request.GET['category-id'])
+		request = self.request.GET
+		if len(request) != 0:
+			if next(iter(request)) == 'category-id':
+				self.queryset = Product.objects.filter(category_id=self.request.GET['category-id'])
+
 		return super().get_queryset()
+
+
+	def get_ordering(self):
+		request = self.request.GET
+		if len(request) != 0:
+			if next(iter(request)) == 'order':
+				ordering = [request['order']]
+				return ordering
+		
 
 	def get_context_data(self):
 		context = super().get_context_data()
@@ -26,4 +40,5 @@ class HomeView(ListView):
 		return context
 
 class ProductHome(DetailView):
-	pass
+	model = Product
+	template_name = 'home/detail.html'

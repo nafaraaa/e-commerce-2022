@@ -34,6 +34,7 @@
             <div class="filter-content collapse in" id="collapse_1" style="">
                 <div class="card-body">
                     <ul class="list-menu">
+                        <li><a href="{% url 'homey:product'%}">All</a></li>
                     {% for category in categories %}
                         <li><a href="{% url 'homey:product'%}?category-id={{forloop.counter}}">{{category}}</a></li>
                     {% endfor %}
@@ -44,18 +45,29 @@
         </article> <!-- filter-group  .// -->
     </div> <!-- card.// -->
 
+    <div class="card">
+        <article class="filter-group">
+            <div class="card-header d-flex flex-column">
+                <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" class="">
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Filter</h6>
+                </a>
+            </div>
+            <div class="filter-content collapse in" id="collapse_2" style="">
+                <div class="card-body">
+                    <ul class="list-menu">
+                        <li><a href="{% url 'homey:product'%}?order=upload_time">Terbaru</a></li>
+                        <li><a href="{% url 'homey:product'%}?order=price">Termurah</a></li>
+                        <li><a href="{% url 'homey:product'%}?order=-price">Termahal</a></li>
+                    </ul>
+
+                </div> <!-- card-body.// -->
+            </div>
+        </article> <!-- filter-group  .// -->
+    </div> <!-- card.// -->
+
         </aside> <!-- col.// -->
         <main class="col-md-9 mt-4">
-
-    <header class="border-bottom mb-4 pb-3">
-            <div class="form-inline">
-                <select class="ml-auto mt-2 form-control">
-                    <option>Latest items</option>
-                    <option>Newest items</option>
-                    <option>Cheapest items</option>
-                </select>
-            </div>
-    </header><!-- sect-heading -->
 
     <div class="row">
         <!--<div class="col-md-4">
@@ -82,12 +94,12 @@
             <div class="col-md-4 col-sm-6 col-6">
                 <figure class="card card-product-grid">
                     <div class="img-wrap"> 
-                        <img src="{{product.image_product.url}}">
-                        <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
+                        <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.image_product.url}}"></a>
+                        <a class="btn-overlay" href="{% url 'homey:detail' product.slug %}"><i class="fa fa-search-plus"></i> Quick view</a>
                     </div> <!-- img-wrap.// -->
                     <figcaption class="info-wrap">
                         <div class="fix-height">
-                            <a href="#" class="title">{{product.title}}</a>
+                            <a href="{% url 'homey:detail' product.slug %}" class="title">{{product.title}}</a>
                             <div class="price-wrap mt-2">
                                 <span class="price">{{product.price}}</span>
                             </div> <!-- price-wrap.// -->

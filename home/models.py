@@ -22,7 +22,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=7,decimal_places=3)
     description = models.TextField()
     upload_time = models.DateField(auto_now_add=True)
-    on_stock = models.BooleanField(default=True)
+    stock = models.IntegerField(default=1)
     slug = models.SlugField(blank= True)
 
 

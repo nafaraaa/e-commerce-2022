@@ -34,9 +34,13 @@ class HomeView(ListView):
 		
 
 	def get_context_data(self):
+		request = self.request.GET
 		context = super().get_context_data()
 		self.kwargs.update(self.extra_context)
 		kwargs = self.kwargs
+		if len(request) != 0:
+			if next(iter(request)) == 'category-id':
+				context['active'] = Category.objects.get(id=self.request.GET['category-id'])
 		return context
 
 class ProductHome(DetailView):

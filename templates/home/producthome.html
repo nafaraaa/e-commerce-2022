@@ -7,8 +7,13 @@
             <h2 class="title-page">Category products</h2>
             <nav>
             <ol class="breadcrumb text-white">
-                <li class="breadcrumb-item"><a href="{% url 'homey:index' %}">Home</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="{% url 'homey:index' %}">Home</a></li>
+                {% if active %}
+                <li class="breadcrumb-item" aria-current="page"><a href="{% url 'homey:product' %}">Products</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{active}}</li>
+                {% else %}
                 <li class="breadcrumb-item active" aria-current="page">Products</li>
+                {% endif %}
             </ol>  
             </nav>
         </div> <!-- container //  -->
@@ -38,6 +43,7 @@
                     {% for category in categories %}
                         <li><a href="{% url 'homey:product'%}?category-id={{forloop.counter}}">{{category}}</a></li>
                     {% endfor %}
+                        
                     </ul>
 
                 </div> <!-- card-body.// -->
@@ -56,7 +62,7 @@
             <div class="filter-content collapse in" id="collapse_2" style="">
                 <div class="card-body">
                     <ul class="list-menu">
-                        <li><a href="{% url 'homey:product'%}?order=upload_time">Terbaru</a></li>
+                        <li><a href="{% url 'homey:product'%}?order=-upload_time">Terbaru</a></li>
                         <li><a href="{% url 'homey:product'%}?order=price">Termurah</a></li>
                         <li><a href="{% url 'homey:product'%}?order=-price">Termahal</a></li>
                     </ul>

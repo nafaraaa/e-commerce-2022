@@ -1,8 +1,18 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django import forms
 
 # Create your models here.
+
+class Customer(models.Model):
+    user = models.OneToOneField(User, null=True, blank= True)
+    name = models.CharField(max_length=255px)
+    email = models.CharField(max_length=255px)
+    
+    def __str__(self):
+        self.name
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200,unique=True)

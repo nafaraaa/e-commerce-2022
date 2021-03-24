@@ -8,7 +8,10 @@
 	{% include "snippets/styles.html" %}
 	<link rel="stylesheet" href="{% static "ui.css" %}">
 	<link rel="stylesheet" href="{% static "style.css" %}">
-	<link rel="stylesheet" href="{% static "breakpoints.css" %}">
+	{% block style %}
+	
+	{% endblock style %}
+		
 
 
 

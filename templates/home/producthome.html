@@ -100,7 +100,7 @@
             <div class="col-md-4 col-sm-6 col-6">
                 <figure class="card card-product-grid">
                     <div class="img-wrap"> 
-                        <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.image_product.url}}"></a>
+                        <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL}}"></a>
                         <a class="btn-overlay" href="{% url 'homey:detail' product.slug %}"><i class="fa fa-search-plus"></i> Quick view</a>
                     </div> <!-- img-wrap.// -->
                     <figcaption class="info-wrap">

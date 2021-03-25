@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    <style>
+        
+        h1,h2,h3,h4,h5,h6{
+            color:hsl(0, 0%, 30%);
+        }
+
+        .box-element{
+            box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+            background-color: #fff;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .thumbnail{
+            width: 100%;
+            height: 200px;
+            -webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+        }
+
+        .product{
+            border-radius: 0 0 4px 4px;
+        }
+
+        .bg-dark{
+            background-color: #4f868c!important;
+        }
+
+        #cart-icon{
+            width:25px;
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        #cart-total{
+            display: block;
+            text-align: center;
+            color:#fff;
+            background-color: red;
+            width: 20px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+            margin-top: 10px;
+        }
+
+        .btn{
+            border-radius: 0;
+        }
+
+        .row-image{
+            width: 100px;
+        }
+
+        .form-field{
+            width:250px;
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .cart-row{
+            display: flex;
+            align-items: flex-stretch;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ececec;
+
+        }
+
+        .quantity{
+            display: inline-block;
+            font-weight: 700;
+            padding-right:10px;
+
+
+        }
+
+        .chg-quantity{
+            width: 12px;
+            cursor: pointer;
+            display: block;
+            margin-top: 5px;
+            transition:.1s;
+        }
+
+        .chg-quantity:hover{
+            opacity: .6;
+        }
+
+
+        .hidden{
+            display: none!important;
+        }
+
+        .grid-cover{
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(50px,1fr) );
+        }
+    </style>
+{% endblock style %}
+    
+
+{% block content %}
+    <section class="under-nav">
+        <div class="container bg-light pt-4 pb-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box-element">
+                        <a class="btn btn-outline-primary" href="#"><i class="fas fa-long-arrow-alt-left"></i> Back Shopping</a>
+                            <div class="grid-cover mt-4 pb-4">
+                                <div class="grid-child my-auto"><h5>Items: <strong>3</strong></h5></div>
+                                <div class="grid-child mx-auto my-auto"><h5>Total:<strong> &#8377; 50.000</strong></h5></div>
+                                <div class="grid-child ml-auto my-auto">
+                                    <a class="btn btn-outline-danger" href="">Checkout</a>
+                                </div>
+                            </div>
+                
+                    </div>
+                    <br>
+                    <div class="box-element">
+                        <div class="cart-row">
+                            <div style="flex:1"><strong>Image Product</strong></div>
+                            <div style="flex:2"><strong>Name</strong></div>
+                            <div style="flex:1"><strong>Price</strong></div>
+                            <div style="flex:2"><strong>Quantity</strong></div>
+                            <div style="flex:1"><strong>Total</strong></div>
+                        </div>
+                        
+                        {% for item in items %}
+                            <div class="cart-row">
+                                <div style="flex:1" ><img class="row-image" src="{{item.product.imageURL}}"></div>
+                                <div style="flex:2"><p>{{item.product.title}}</p></div>
+                                <div style="flex:1"><p>{{item.product.price}}</p></div>
+                                <div style="flex:2">
+                                    <p class="quantity mr-4">2</p>
+                                    <div class="quantity">
+                                    
+                                        <i data-product='1' data-action='add' class="fas fa-chevron-up chg-quantity update-cart"></i>
+
+                                        <i data-product='1' data-action='remove' class="fas fa-chevron-down chg-quantity update-cart"></i>
+                                        
+                                    </div>
+                                </div>
+                                <div style="flex:1"><p>20</p></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    

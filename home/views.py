@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product,Category
+from .utils import cartData
 from django.views.generic import (
 		ListView,
 		DetailView,
@@ -34,13 +35,15 @@ class HomeView(ListView):
 		
 
 	def get_context_data(self):
-		request = self.request.GET
+		request = self.request
 		context = super().get_context_data()
 		self.kwargs.update(self.extra_context)
 		kwargs = self.kwargs
-		if len(request) != 0:
-			if next(iter(request)) == 'category-id':
-				context['active'] = Category.objects.get(id=self.request.GET['category-id'])
+		if len(request.GET) != 0:
+			if next(iter(request.GET)) == 'category-id':
+				context['active'] = Category.objects.get(id=request.GET['category-id'])
+		context.update(cartData(self.request))
+		print(context)
 		return context
 
 class ProductHome(DetailView):

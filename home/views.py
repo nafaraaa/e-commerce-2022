@@ -43,7 +43,6 @@ class HomeView(ListView):
 			if next(iter(request.GET)) == 'category-id':
 				context['active'] = Category.objects.get(id=request.GET['category-id'])
 		context.update(cartData(self.request))
-		print(context)
 		return context
 
 class ProductHome(DetailView):

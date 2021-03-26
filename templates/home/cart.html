@@ -115,8 +115,8 @@
                     <div class="box-element">
                         <a class="btn btn-outline-primary" href="#"><i class="fas fa-long-arrow-alt-left"></i> Back Shopping</a>
                             <div class="grid-cover mt-4 pb-4">
-                                <div class="grid-child my-auto"><h5>Items: <strong>3</strong></h5></div>
-                                <div class="grid-child mx-auto my-auto"><h5>Total:<strong> &#8377; 50.000</strong></h5></div>
+                                <div class="grid-child my-auto"><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></div>
+                                <div class="grid-child mx-auto my-auto"><h5>Total: <strong>Rp {{order.get_cart_totals}}</strong></h5></div>
                                 <div class="grid-child ml-auto my-auto">
                                     <a class="btn btn-outline-danger" href="">Checkout</a>
                                 </div>
@@ -139,7 +139,7 @@
                                 <div style="flex:2"><p>{{item.product.title}}</p></div>
                                 <div style="flex:1"><p>{{item.product.price}}</p></div>
                                 <div style="flex:2">
-                                    <p class="quantity mr-4">2</p>
+                                    <p class="quantity mr-4">{{item.quantity}}</p>
                                     <div class="quantity">
                                     
                                         <i data-product='1' data-action='add' class="fas fa-chevron-up chg-quantity update-cart"></i>
@@ -148,7 +148,7 @@
                                         
                                     </div>
                                 </div>
-                                <div style="flex:1"><p>20</p></div>
+                                <div style="flex:1"><p>Rp {{item.get_total}}</p></div>
                             </div>
                         {% endfor %}
                     </div>

@@ -22,86 +22,16 @@
             box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
         }
 
-        .product{
-            border-radius: 0 0 4px 4px;
-        }
-
-        .bg-dark{
-            background-color: #4f868c!important;
-        }
-
-        #cart-icon{
-            width:25px;
-            display: inline-block;
-            margin-left: 15px;
-        }
-
-        #cart-total{
-            display: block;
-            text-align: center;
-            color:#fff;
-            background-color: red;
-            width: 20px;
-            height: 25px;
-            border-radius: 50%;
-            font-size: 14px;
-        }
-
-        .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
-            margin-top: 10px;
-        }
-
-        .btn{
-            border-radius: 0;
-        }
-
-        .row-image{
-            width: 100px;
-        }
-
-        .form-field{
-            width:250px;
-            display: inline-block;
+        td input{
+            width: 40px;
+            height: 30px;
             padding: 5px;
         }
 
-        .cart-row{
+        .cart-info{
             display: flex;
-            align-items: flex-stretch;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ececec;
-
-        }
-
-        .quantity{
-            display: inline-block;
-            font-weight: 700;
-            padding-right:10px;
-
-
-        }
-
-        .chg-quantity{
-            width: 12px;
-            cursor: pointer;
-            display: block;
-            margin-top: 5px;
-            transition:.1s;
-        }
-
-        .chg-quantity:hover{
-            opacity: .6;
-        }
-
-
-        .hidden{
-            display: none!important;
-        }
-
-        .grid-cover{
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(50px,1fr) );
+            flex-wrap: wrap;
+            text-align: center;
         }
     </style>
 {% endblock style %}
@@ -110,48 +40,41 @@
 {% block content %}
     <section class="under-nav">
         <div class="container bg-light pt-4 pb-4">
+            <a class="btn btn-outline-primary mb-4" href="#"><i class="fas fa-long-arrow-alt-left"></i> Back Shopping</a>
             <div class="row">
                 <div class="col-md-12">
                     <div class="box-element">
-                        <a class="btn btn-outline-primary" href="#"><i class="fas fa-long-arrow-alt-left"></i> Back Shopping</a>
                             <div class="grid-cover mt-4 pb-4">
                                 <div class="grid-child my-auto"><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></div>
                                 <div class="grid-child mx-auto my-auto"><h5>Total: <strong>Rp {{order.get_cart_totals}}</strong></h5></div>
                                 <div class="grid-child ml-auto my-auto">
-                                    <a class="btn btn-outline-danger" href="">Checkout</a>
+                                    <a class="btn btn-outline-danger" href="{% url 'homey:checkout' %}">Checkout</a>
                                 </div>
                             </div>
                 
                     </div>
                     <br>
-                    <div class="box-element">
-                        <div class="cart-row">
-                            <div style="flex:1"><strong>Image Product</strong></div>
-                            <div style="flex:2"><strong>Name</strong></div>
-                            <div style="flex:1"><strong>Price</strong></div>
-                            <div style="flex:2"><strong>Quantity</strong></div>
-                            <div style="flex:1"><strong>Total</strong></div>
-                        </div>
-                        
-                        {% for item in items %}
-                            <div class="cart-row">
-                                <div style="flex:1" ><img class="row-image" src="{{item.product.imageURL}}"></div>
-                                <div style="flex:2"><p>{{item.product.title}}</p></div>
-                                <div style="flex:1"><p>{{item.product.price}}</p></div>
-                                <div style="flex:2">
-                                    <p class="quantity mr-4">{{item.quantity}}</p>
-                                    <div class="quantity">
-                                    
-                                        <i data-product='1' data-action='add' class="fas fa-chevron-up chg-quantity update-cart"></i>
-
-                                        <i data-product='1' data-action='remove' class="fas fa-chevron-down chg-quantity update-cart"></i>
-                                        
-                                    </div>
-                                </div>
-                                <div style="flex:1"><p>Rp {{item.get_total}}</p></div>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    <table class="table text-center">
+                        <thead class="thead bg-blue">
+                            <tr>
+                                <th width="300px" scope="col">Product</th>
+                                <th width="300px" scope="col">Price</th>
+                                <th width="300px" scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td class="cart-info" style="vertical-align: middle;">
+                                        <img width="80px" src="{{item.product.imageURL}}" alt="">
+                                        <p class="pt-2 pl-2">{{item.product.title}}</p>
+                                    </td>
+                                    <td style="vertical-align: middle;">{{item.product.price}}</td>
+                                    <td style="vertical-align: middle;" width="100px"><input type="number" value="{{item.quantity}}"></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

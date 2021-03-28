@@ -1,5 +1,5 @@
 from django.urls import path,include
-from.views import HomeView,ProductHome
+from.views import *
 
 app_name = 'homey'
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('product/<slug:slug>',ProductHome.as_view(),name='detail'),
     path('cart/',HomeView.as_view(template_name='home/cart.html'),name="cart"),
     path('checkout/',HomeView.as_view(template_name='home/checkout.html'),name='checkout'),
+    path('update-item/',updateItem, name='update-item'),
 ]

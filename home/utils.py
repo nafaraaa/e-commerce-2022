@@ -13,4 +13,6 @@ def cartData(request):
         print(order.get_cart_totals)
     else:
         items = []
+        order = {'get_cart_items':'0','get_cart_totals':'0'}
+        items = order['get_cart_totals']
     return {'items':items, 'order':order}

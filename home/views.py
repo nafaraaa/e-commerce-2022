@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from .models import *
+from .forms import FormShipping
 from .utils import cartData
 from django.http import JsonResponse
 import json
 from django.views.generic import (
         ListView,
         DetailView,
+        FormView,
     )
 
 # Create your views here.
@@ -50,6 +52,16 @@ class HomeView(ListView):
 class ProductHome(DetailView):
     model = Product
     template_name = 'home/detail.html'
+
+class FormShipping(FormView):
+    template_name = 'home/checkout.html'
+    form_class = FormShipping
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update(cartData(self.request))
+        return context
+
 
 
 def updateItem(request):

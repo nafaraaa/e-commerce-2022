@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block style %}
     <style>
         
@@ -33,6 +33,33 @@
             flex-wrap: wrap;
             text-align: center;
         }
+
+
+        .quantity{
+            display: inline-block;
+            font-weight: 700;
+            padding-right:10px;
+
+
+        }
+
+        .chg-quantity{
+            width: 12px;
+            cursor: pointer;
+            display: block;
+            margin-top: 5px;
+            transition:.1s;
+        }
+
+        .chg-quantity:hover{
+            opacity: .6;
+        }
+
+
+        .hidden{
+            display: none!important;
+        }
+
     </style>
 {% endblock style %}
     
@@ -45,10 +72,10 @@
                 <div class="col-md-12">
                     <div class="box-element">
                             <div class="grid-cover mt-4 pb-4">
-                                <div class="grid-child my-auto"><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></div>
+                                <div class="grid-child my-auto"><h5>Items: <strong id="quantity-item">{{order.get_cart_items}}</strong></h5></div>
                                 <div class="grid-child mx-auto my-auto"><h5>Total: <strong>Rp {{order.get_cart_totals}}</strong></h5></div>
                                 <div class="grid-child ml-auto my-auto">
-                                    <a class="btn btn-outline-danger" href="{% url 'homey:checkout' %}">Checkout</a>
+                                    <a id="btn-checkout" class="btn btn-outline-danger" href="{% url 'homey:checkout' %}">Checkout</a>
                                 </div>
                             </div>
                 
@@ -70,7 +97,14 @@
                                         <p class="pt-2 pl-2">{{item.product.title}}</p>
                                     </td>
                                     <td style="vertical-align: middle;">{{item.product.price}}</td>
-                                    <td style="vertical-align: middle;" width="100px"><input type="number" value="{{item.quantity}}"></td>
+                                    <td style="vertical-align: middle;" class="td-quantity" width="100px">
+                                        <p class="quantity">{{ item.quantity }}</p>
+                                        <div class="quantity">
+                                            <img data-product='{{item.product.id}}' data-action='add' class="chg-quantity update-cart" src="{% static 'arrow-up.png' %}">
+
+                                            <img data-product='{{item.product.id}}' data-action='remove' class="chg-quantity update-cart" src="{% static 'arrow-down.png' %}">
+                                        </div>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -80,4 +114,17 @@
         </div>
     </section>
 {% endblock content %}
+{% block script %}
+    
+    <script type="text/javascript">
+    var product = document.getElementById('quantity-item').textContent
+    console.log(product)
+
+    if(product=='0'){
+        document.getElementById('btn-checkout').classList.add('hidden');
+    }
+    </script>
+
+{% endblock script %}
+
     

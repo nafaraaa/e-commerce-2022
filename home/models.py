@@ -85,6 +85,9 @@ class OrderItem(models.Model):
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL, blank=True)
     order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL, blank=True)
+    email = models.EmailField(max_length=200,null=True)
+    kode_pos = models.IntegerField(null=True)
+    kota = models.CharField(max_length=255,default='bogor')
     address = models.CharField(max_length=255, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     

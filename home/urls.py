@@ -8,5 +8,6 @@ urlpatterns = [
     path('product/<slug:slug>',ProductHome.as_view(),name='detail'),
     path('cart/',HomeView.as_view(template_name='home/cart.html'),name="cart"),
     path('checkout/',FormShipping.as_view(),name='checkout'),
+    # path('checkout/<int:pk>',FormShipping.as_view(),name='checkout'),
     path('update-item/',updateItem, name='update-item'),
 ]

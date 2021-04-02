@@ -40,16 +40,9 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank= True)
-    name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    
-    def __str__(self):
-        return self.name
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank= True)
     date_order = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
     transaction_id = models.CharField(max_length=255, null=True)
@@ -83,7 +76,7 @@ class OrderItem(models.Model):
         return self.product.price * self.quantity
 
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank= True)
     order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL, blank=True)
     email = models.EmailField(max_length=200,null=True)
     kode_pos = models.IntegerField(null=True)

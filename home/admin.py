@@ -11,18 +11,15 @@ class CategoryAdmin(admin.ModelAdmin):
 class ProductsAdmin(admin.ModelAdmin):
 	list_display = ['title','price','upload_time','slug']
 
-@admin.register(Customer)
-class ProductsAdmin(admin.ModelAdmin):
-	list_display = ['name','email']
 
 @admin.register(Order)
 class ProductsAdmin(admin.ModelAdmin):
-	list_display = ['customer','date_order','transaction_id']
+	list_display = ['user','date_order','transaction_id']
 
 admin.site.register(OrderItem)
 
 @admin.register(ShippingAddress)
 class ProductsAdmin(admin.ModelAdmin):
-	list_display = ['customer','order','address']
+	list_display = ['user','order','address']
 
 

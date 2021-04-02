@@ -1,5 +1,6 @@
 from django import forms
 from .models import ShippingAddress
+from django.contrib.auth.models import User
 
 class FormShipping(forms.ModelForm):
 	class Meta:
@@ -35,5 +36,13 @@ class FormShipping(forms.ModelForm):
 			)
 		}
 			
+class FormLogIn(forms.ModelForm):
+	class Meta:
+		model = User
+		fields = '__all__'
+			
+
+	
+		
 		
 

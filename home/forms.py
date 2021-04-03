@@ -63,9 +63,25 @@ class FormLogIn(forms.ModelForm):
 		}
 
 class FormSignUp(UserCreationForm):
+	password1 = forms.CharField(
+		strip=False,
+		widget=forms.PasswordInput(attrs={'class': 'form-control mb-3'}),
+	)
+
+	password2 = forms.CharField(
+		label=("Password confirmation"),
+		widget=forms.PasswordInput(attrs={'class': 'form-control mb-3'}),
+		strip=False,
+		help_text=("Enter the same password as before, for verification."),
+	)
 	class Meta:
 		model = User
-		fields = '__all__'	
+		fields = (
+			'username',
+			'email',
+			'password1',
+			'password2'
+		)	
 		widgets = {
 			'username':forms.TextInput(
 				attrs={
@@ -77,12 +93,6 @@ class FormSignUp(UserCreationForm):
 					'class':"form-control mb-3",
 					'placeholder':"ex. name@gmail.com",
 					'type':	'email'			
-				}
-			),
-			'password1':forms.TextInput(
-				attrs={
-					'class':"form-control mb-3",
-					'type':'password'				
 				}
 			),
 		}

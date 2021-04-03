@@ -63,6 +63,15 @@ class FormShipping(FormView):
         context.update(cartData(self.request))
         return context
 
+class FormSignUp(FormView):
+    template_name = 'home/signup.html'
+    form_class = FormSignUp
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['judul'] = 'SignUp'
+        return context
+
 class FormLogIn(FormView):
     template_name = 'home/login.html'
     form_class = FormLogIn
@@ -70,16 +79,6 @@ class FormLogIn(FormView):
     def get_context_data(self):
         context = super().get_context_data()
         context['judul'] = 'LogIn'
-        return context
-
-class FormSignUp(FormView):
-    template_name = 'home/login.html'
-    form_class = FormSignUp
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['judul'] = 'SignUp'
-        print(context)
         return context
 
 def updateItem(request):

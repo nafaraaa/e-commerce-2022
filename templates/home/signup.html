@@ -12,15 +12,21 @@
                     <div class="form-group">
                         {{form.username.label}}    
                         {{form.username}}
-                        {{form.password.label}}
-                        {{form.password}}
+                        {{form.email.label}}    
+                        {{form.email}}
+                        {{form.password1.label}}
+                        {{form.password1}}
+                        {{form.password2.label}}
+                        {{form.password2}}
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-primary btn-block"> Login  </button>
                     </div> <!-- form-group// -->    
                 </form>
                 </div> <!-- card-body.// -->
-                <div class="card-footer text-center" id="signup-form">Don't have an account? <a href="{% url 'homey:signup' %}">Sign up</a></div>
+                <div class="card-footer text-center" id="signup-form">have an account? <a href="{% url 'homey:login' %}">Log In</a></div>
             </div> <!-- card .// -->
         </div>
     </section>
 {% endblock content %}
+
+    

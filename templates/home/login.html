@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="under-nav d-flex justify-content-center">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                <h4 class="card-title mb-4">{{judul}}</h4>
+                <form>
+                    {% csrf_token %}
+                    <div class="form-group">
+                    {{form.username.label}}    
+                    {{form.username}}
+                    {{form.email.label}}
+                    {{form.email}}
+                    {{form.password.label}}
+                    {{form.password}}
+                    {{form.password1.label}}
+                    {{form.password1}}
+                    {{form.password2.label}}
+                    {{form.password2}}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                    </div> <!-- form-group// -->    
+                </form>
+                </div> <!-- card-body.// -->
+                <div class="card-footer text-center" id="signup-form">Don't have an account? <a href="{% url 'homey:signup' %}">Sign up</a></div>
+            </div> <!-- card .// -->
+        </div>
+    </section>
+{% endblock content %}
+
+{% block script %}
+    <script>
+        if('{{judul}}' == 'SignUp'){
+            document.getElementById('signup-form').classList.add('hidden')
+        }
+    </script>
+{% endblock script %}
+    

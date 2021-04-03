@@ -1,6 +1,8 @@
 from django import forms
 from .models import ShippingAddress
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
 
 class FormShipping(forms.ModelForm):
 	class Meta:
@@ -39,10 +41,48 @@ class FormShipping(forms.ModelForm):
 class FormLogIn(forms.ModelForm):
 	class Meta:
 		model = User
-		fields = '__all__'
-			
-
-	
+		fields = [
+			'username',
+			'password'
+		]
 		
-		
+		widgets = {
+			'username':forms.TextInput(
+				attrs={
+					'class':"form-control mb-3",	
+				}
+			),
 
+			'password':forms.TextInput(
+				attrs={
+					'class':"form-control mb-3",
+					'type':'password'				
+				}
+			)
+
+		}
+
+class FormSignUp(UserCreationForm):
+	class Meta:
+		model = User
+		fields = '__all__'	
+		widgets = {
+			'username':forms.TextInput(
+				attrs={
+					'class':"form-control mb-3",
+				}
+			),
+			'email':forms.TextInput(
+				attrs={
+					'class':"form-control mb-3",
+					'placeholder':"ex. name@gmail.com",
+					'type':	'email'			
+				}
+			),
+			'password1':forms.TextInput(
+				attrs={
+					'class':"form-control mb-3",
+					'type':'password'				
+				}
+			),
+		}

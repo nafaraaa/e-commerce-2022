@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-from .forms import FormShipping
+from .forms import FormShipping,FormLogIn,FormSignUp
 from .utils import cartData
 from django.http import JsonResponse
 import json
@@ -47,6 +47,7 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
+        print(context)
         return context
 
 class ProductHome(DetailView):
@@ -62,7 +63,24 @@ class FormShipping(FormView):
         context.update(cartData(self.request))
         return context
 
+class FormLogIn(FormView):
+    template_name = 'home/login.html'
+    form_class = FormLogIn
 
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['judul'] = 'LogIn'
+        return context
+
+class FormSignUp(FormView):
+    template_name = 'home/login.html'
+    form_class = FormSignUp
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['judul'] = 'SignUp'
+        print(context)
+        return context
 
 def updateItem(request):
     data = json.loads(request.body)

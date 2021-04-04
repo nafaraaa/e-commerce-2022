@@ -7,20 +7,40 @@
             <div class="card">
                 <div class="card-body">
                 <h4 class="card-title mb-4">{{judul}}</h4>
-                <form>
+                <form method="POST">
                     {% csrf_token %}
                     <div class="form-group">
                         {{form.username.label}}    
                         {{form.username}}
+                        {{form.email.label}}    
+                        {{form.email}}
                         {{form.password.label}}
                         {{form.password}}
+                        {{form.password1.label}}
+                        {{form.password1}}
+                        {{form.password2.label}}
+                        {{form.password2}}
                     <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                        <button type="submit" class="btn btn-primary btn-block">{{judul}}  </button>
                     </div> <!-- form-group// -->    
                 </form>
                 </div> <!-- card-body.// -->
                 <div class="card-footer text-center" id="signup-form">Don't have an account? <a href="{% url 'homey:signup' %}">Sign up</a></div>
+                <div class="card-footer text-center" id="login-form">have an account? <a href="{% url 'homey:login' %}">Log in</a></div>
             </div> <!-- card .// -->
         </div>
     </section>
 {% endblock content %}
+{% block script %}
+<script>
+    var judul = '{{judul}}'
+    console.log(judul)
+    if (judul == 'SignUp'){
+        document.getElementById('signup-form').classList.add('hidden')
+    }
+    else{
+        document.getElementById('login-form').classList.add('hidden')
+    }
+</script>
+    
+{% endblock script %}

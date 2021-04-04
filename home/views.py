@@ -2,12 +2,15 @@ from django.shortcuts import render
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
 from .utils import cartData
-from django.http import JsonResponse
+from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse_lazy
 import json
 from django.views.generic import (
         ListView,
         DetailView,
         FormView,
+        CreateView,
     )
 
 # Create your views here.
@@ -38,7 +41,7 @@ class HomeView(ListView):
                 return ordering
         
 
-    def get_context_data(self):
+    def get_context_data(self,*args,**kwargs):
         request = self.request
         context = super().get_context_data()
         self.kwargs.update(self.extra_context)
@@ -47,7 +50,6 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        print(context)
         return context
 
 class ProductHome(DetailView):
@@ -63,8 +65,9 @@ class FormShipping(FormView):
         context.update(cartData(self.request))
         return context
 
-class FormSignUp(FormView):
-    template_name = 'home/signup.html'
+class FormSignUp(CreateView):
+    template_name = 'registration/login.html'
+    success_url = reverse_lazy('homey:index')
     form_class = FormSignUp
 
     def get_context_data(self):
@@ -72,14 +75,25 @@ class FormSignUp(FormView):
         context['judul'] = 'SignUp'
         return context
 
-class FormLogIn(FormView):
-    template_name = 'home/login.html'
-    form_class = FormLogIn
+# class FormLogIn(FormView):
+#     template_name = 'registration/login.html'
+#     form_class = FormLogIn
+#     success_url = reverse_lazy('homey:index')
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['judul'] = 'LogIn'
-        return context
+#     def form_valid(self,request):
+#         request = self.request.POST
+#         print(request,'hai')
+#         username = request['username']
+#         password = request['password']
+#         user = authenticate(self.request,username=username,password=password)
+#         print(user)
+#         return HttpResponseRedirect(self.get_success_url())
+
+#     def get_context_data(self,*args,**kwargs):
+#         context = super().get_context_data()
+#         print(context)
+#         context['judul'] = 'LogIn'
+#         return context
 
 def updateItem(request):
     data = json.loads(request.body)

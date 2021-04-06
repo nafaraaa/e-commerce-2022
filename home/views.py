@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
 from .utils import cartData
@@ -65,35 +65,6 @@ class FormShipping(FormView):
         context.update(cartData(self.request))
         return context
 
-class FormSignUp(CreateView):
-    template_name = 'registration/login.html'
-    success_url = reverse_lazy('homey:index')
-    form_class = FormSignUp
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['judul'] = 'SignUp'
-        return context
-
-# class FormLogIn(FormView):
-#     template_name = 'registration/login.html'
-#     form_class = FormLogIn
-#     success_url = reverse_lazy('homey:index')
-
-#     def form_valid(self,request):
-#         request = self.request.POST
-#         print(request,'hai')
-#         username = request['username']
-#         password = request['password']
-#         user = authenticate(self.request,username=username,password=password)
-#         print(user)
-#         return HttpResponseRedirect(self.get_success_url())
-
-#     def get_context_data(self,*args,**kwargs):
-#         context = super().get_context_data()
-#         print(context)
-#         context['judul'] = 'LogIn'
-#         return context
 
 def updateItem(request):
     data = json.loads(request.body)

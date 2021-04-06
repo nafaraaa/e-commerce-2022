@@ -51,8 +51,9 @@
 	  		</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			    <div class="navbar-nav ml-auto">
-					<a id="logout-btn" href="/logout" style="width:80px; box-sizing:border-box;" class="btn btn-outline-primary my-2 my-sm-0 mr-2">Log-out</a>
-					<a id="login-btn" href="/login" style="width:75px; box-sizing:border-box;" class="btn btn-outline-primary my-2 my-sm-0 mr-2">Log-in</a>
+					<a id="register-btn" href='{% url 'register' %}' style="width:80px; box-sizing:border-box;" class="btn btn-outline-primary my-2 my-sm-0 mr-2">Register</a>
+					<a id="login-btn" href='{% url "login" %}' style="width:75px; box-sizing:border-box;" class="btn btn-outline-primary my-2 my-sm-0 mr-2">Log In</a>
+					<a id="logout-btn" href='{% url "logout" %}' style="width:85px; box-sizing:border-box;" class="btn btn-outline-primary my-2 my-sm-0 mr-2 hidden">Log Out</a>
 	  				<a href="{% url 'homey:cart' %}" class="tombol btn btn-outline-primary my-2 my-sm-0">
 	  					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
 	  						<path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
@@ -137,13 +138,19 @@
 <script src="https://kit.fontawesome.com/47a5254e53.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static "js/cart.js" %}"></script>
 <script type="text/javascript">
-if(user == 'AnonymousUser'){
-	document.getElementById('logout-btn').classList.add('hidden');
-}
-else{
-	document.getElementById('login-btn').classList.add('hidden');
-}
+	var user = '{{user}}'
+	console.log(user)
+	if(user != 'AnonymousUser'){
+		document.getElementById('register-btn').classList.add('hidden')
+		document.getElementById('login-btn').classList.add('hidden')
+		console.log('djancok1')
+		document.getElementById('logout-btn').classList.remove('hidden')
+
+	}
+
+
 </script>
+
 
 
 {% block script %}

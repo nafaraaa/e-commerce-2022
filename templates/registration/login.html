@@ -2,45 +2,41 @@
 {% load static %}
 
 {% block content %}
-    <section class="under-nav d-flex justify-content-center">
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                <h4 class="card-title mb-4">{{judul}}</h4>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        {{form.username.label}}    
-                        {{form.username}}
-                        {{form.email.label}}    
-                        {{form.email}}
-                        {{form.password.label}}
-                        {{form.password}}
-                        {{form.password1.label}}
-                        {{form.password1}}
-                        {{form.password2.label}}
-                        {{form.password2}}
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary btn-block">{{judul}}  </button>
-                    </div> <!-- form-group// -->    
-                </form>
-                </div> <!-- card-body.// -->
-                <div class="card-footer text-center" id="signup-form">Don't have an account? <a href="{% url 'homey:signup' %}">Sign up</a></div>
-                <div class="card-footer text-center" id="login-form">have an account? <a href="{% url 'homey:login' %}">Log in</a></div>
+    <section class="under-nav">
+        <div class="container d-flex justify-content-center">
+            <div class="card col-sm-8 col-md-10 col-lg-12" style="padding:0px;">
+              <div class="card-body">
+              <h4 class="card-title mb-4">Sign in</h4>
+              <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                     <label>Email</label>
+                     <input name="username" class="form-control" type="text">
+                  </div> <!-- form-group// -->
+                  <div class="form-group">
+                    <a class="float-right" href="#">Forgot</a>
+                    <label>Password</label>
+                    <input class="form-control" placeholder="******" name="password" type="password">
+                  </div> <!-- form-group// --> 
+                  <div class="form-group"> 
+                    <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> Remember </div> </label>
+                  </div> <!-- form-group form-check .// -->
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                  </div> <!-- form-group// -->
+                  <div class="form-group">
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                        
+                  </div>    
+              </form>
+              <div class="card-footer text-center">Don't have an account? <a href="">Sign up</a></div>
+              </div> <!-- card-body.// -->
+              
             </div> <!-- card .// -->
-        </div>
+        </div>	
     </section>
 {% endblock content %}
 {% block script %}
-<script>
-    var judul = '{{judul}}'
-    console.log(judul)
-    if (judul == 'SignUp'){
-        document.getElementById('signup-form').classList.add('hidden')
-    }
-    else{
-        document.getElementById('login-form').classList.add('hidden')
-    }
-</script>
-    
 {% endblock script %}

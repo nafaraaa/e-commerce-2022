@@ -22,22 +22,24 @@
       <div class="row">
 		<div class="col-md-6 pb-4">
 			<div class="box-element" id="form-wrapper">
-				<form id="form">
-					<div id="user-info">
-                        <a  class="btn btn-outline-danger mb-3" href="{% url 'homey:cart' %}">&#x2190; Back to Cart</a>
-						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Name..">
-						</div>
-						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
-						</div>
+				<a  class="btn btn-outline-danger mb-3" href="{% url 'homey:cart' %}">&#x2190; Back to Cart</a>
+				<div id="user-info">
+					<div class="form-field">
+						<input required class="form-control" type="text" name="name" placeholder="Name..">
 					</div>
-
+					<div class="form-field">
+						<input required class="form-control" type="email" name="email" placeholder="Email..">
+					</div>
+				</div>
+				<form method="POST">
+					{% csrf_token %}
 					<div id="shipping-info">
 						<hr>
 						<p>Shipping Information:</p>
 						<hr>
 						<div class="form-field">
+							{{form.user}}
+							{{form.order}}
 							<p class="pl-1">Email:</p>
 							{{form.email}}
 						</div>
@@ -54,7 +56,6 @@
 							{{form.address}}
 						</div>
 					</div>
-
 					<hr>
 					<input id="form-button" class="btn btn-primary btn-block" type="submit" value="Continue">
 				</form>
@@ -112,14 +113,8 @@
         document.getElementById('form-button').classList.add('hidden');
         document.getElementById('payment-info').classList.remove('hidden');
     })    
-
-    document.getElementById('make-payment').addEventListener('click', function(e){
-    	submitFormData()
-    })
-
-    function submitFormData(){
-    	console.log('Payment Button Clicked')
-    }
+	var anjay =document.getElementsByTagName(user)
+	console.log(anjay)
 </script>
 {% endblock script %}
 

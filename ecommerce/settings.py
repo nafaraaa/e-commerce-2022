@@ -113,5 +113,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
 ]
-LOGIN_URL = 'user/login/'
+LOGIN_URL = 'homey:index'
 LOGIN_REDIRECT_URL = '/'

@@ -7,7 +7,7 @@ urlpatterns = [
     path('product/',HomeView.as_view(template_name='home/producthome.html'),name='product'),
     path('product/<slug:slug>',ProductHome.as_view(),name='detail'),
     path('cart/',HomeView.as_view(template_name='home/cart.html'),name="cart"),
-    path('checkout/',FormShipping.as_view(),name='checkout'),
+    path('checkout/',ShippingView,name='checkout'),
     # path('user/login',FormSignUp.as_view(),name='login'),
     # path('user/signup',FormSignUp.as_view(),name='signup'),
     # path('checkout/<int:pk>',FormShipping.as_view(),name='checkout'),

@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django import forms
-
+from django.urls import reverse
+import random
 # Create your models here.
 
 class Category(models.Model):
@@ -42,13 +43,18 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank= True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank= True)
     date_order = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False, null=True, blank=False)
-    transaction_id = models.CharField(max_length=255, null=True)
+    transaction_id = models.CharField(max_length=255, null=True, unique=True)
     
     def __str__(self):
         return str(self.id)
+
+    def save(self,*args,**kwargs):
+        anjay = random.randrange(100,99999999)
+        self.transaction_id = anjay
+        super(Order,self).save()
 
     @property
     def get_cart_totals(self):
@@ -76,7 +82,7 @@ class OrderItem(models.Model):
         return self.product.price * self.quantity
 
 class ShippingAddress(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank= True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank= True)
     order = models.ForeignKey(Order, null=True, on_delete=models.SET_NULL, blank=True)
     email = models.EmailField(max_length=200,null=True)
     kode_pos = models.IntegerField(null=True)
@@ -86,3 +92,6 @@ class ShippingAddress(models.Model):
     
     def __str__(self):
         return self.address
+
+    def get_absolute_url(self):
+        return reverse('homey:index')

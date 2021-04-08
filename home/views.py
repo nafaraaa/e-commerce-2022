@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
-from .utils import cartData
+from .utils import cartData,CompleteOrder
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -56,21 +57,44 @@ class ProductHome(DetailView):
     model = Product
     template_name = 'home/detail.html'
 
-class FormShipping(FormView):
-    template_name = 'home/checkout.html'
-    form_class = FormShipping
+# class FormShipping(CreateView):
+#     template_name = 'home/checkout.html'
+#     form_class = FormShipping
+#     def get_context_data(self):
+#         context = super().get_context_data()
+#         context.update(cartData(self.request))
+#         print(context)
+#         return context
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        context.update(cartData(self.request))
-        return context
+def ShippingView(request):
+    context = {}
+    form = FormShipping
+    cart = cartData
+    context.update(cart(request))
+    if request.method == 'POST':
+        form = FormShipping(request.POST)
+        if form.is_valid():
+            customer = request.user
+            shipping,created = ShippingAddress.objects.get_or_create(
+                user=customer,
+                order=context['order'],
+                email=request.POST.get('email'),
+                kode_pos=request.POST.get('kode_pos'),
+                kota=request.POST.get('kota'),
+                address=request.POST.get('address'),
+            )         
+            shipping.save()
+            CompleteOrder(request)
+    context['form']=form
+    return render(request, 'home/checkout.html', context)
 
-
+@login_required
 def updateItem(request):
     data = json.loads(request.body)
+    print(request.body)
     productId = data['productId']
     action = data['action']
-    print(productId,action)
+    print(productId,action,'hai')
     customer = request.user
     product = Product.objects.get(id=productId)
     order,created = Order.objects.get_or_create(user=customer, complete=False)

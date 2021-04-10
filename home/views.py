@@ -66,6 +66,7 @@ class ProductHome(DetailView):
 #         print(context)
 #         return context
 
+@login_required
 def ShippingView(request):
     context = {}
     form = FormShipping
@@ -85,6 +86,7 @@ def ShippingView(request):
             )         
             shipping.save()
             CompleteOrder(request)
+            return redirect('homey:index')
     context['form']=form
     return render(request, 'home/checkout.html', context)
 

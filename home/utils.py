@@ -16,6 +16,7 @@ def cartData(request):
         items = order['get_cart_totals']
     return {'items':items, 'order':order}
 
+
 def CompleteOrder(request):
     cart = cartData(request)
     if request.user.is_authenticated:

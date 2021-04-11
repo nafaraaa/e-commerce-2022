@@ -62,9 +62,9 @@
             <div class="filter-content collapse in" id="collapse_2" style="">
                 <div class="card-body">
                     <ul class="list-menu">
-                        <li><a href="{% url 'homey:product'%}?order=-upload_time">Terbaru</a></li>
-                        <li><a href="{% url 'homey:product'%}?order=price">Termurah</a></li>
-                        <li><a href="{% url 'homey:product'%}?order=-price">Termahal</a></li>
+                        <li><a name='list-terbaru' href="{% url 'homey:product'%}?order=-upload_time">Terbaru</a></li>
+                        <li><a name='list-termurah' href="{% url 'homey:product'%}?order=price">Termurah</a></li>
+                        <li><a name='list-termahal' href="{% url 'homey:product'%}?order=-price">Termahal</a></li>
                     </ul>
 
                 </div> <!-- card-body.// -->
@@ -119,13 +119,24 @@
 
 
     <nav class="mt-4" aria-label="Page navigation sample">
-      <ul class="pagination">
+    {% if is_paginated %}
+    <ul class="pagination">
+        
+    {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="{% url 'homey:product' %}?page={{page_obj.previous_page_number}}">Previous</a></li>    
+    {% else %}
         <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-      </ul>
+    {% endif %}    
+    {% for i in paginator.page_range %}
+        <li class="page-item"><a class="page-link" href="{% url 'homey:product' %}?page={{i}}">{{i}}</a></li>
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="{% url 'homey:product' %}?page={{page_obj.next_page_number}}">Next</a></li>    
+    {% else %}
+        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+    {% endif %} 
+    </ul>
+    {% endif %}
     </nav>
 
         </main> <!-- col.// -->

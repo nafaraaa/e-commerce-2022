@@ -51,6 +51,7 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
+        context['URL']=request.path#This Is For Get Current Url
         return context
 
 class ProductHome(DetailView):

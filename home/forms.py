@@ -9,7 +9,6 @@ class FormShipping(forms.ModelForm):
 		model = ShippingAddress
 		fields = [
 			'email',
-			'kode_pos',
 			'kota',
 			'address',
 		]
@@ -18,11 +17,6 @@ class FormShipping(forms.ModelForm):
 				attrs={
 					'class':'form-control',
 					'placeholder':'Contoh = admincontoh@gmail.com'
-				}
-			),
-			'kode_pos':forms.NumberInput(
-				attrs={
-					'class':'form-control',
 				}
 			),
 			'kota':forms.TextInput(

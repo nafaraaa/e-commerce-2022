@@ -75,7 +75,8 @@
                                 <div class="grid-child my-auto"><h5>Items: <strong id="quantity-item">{{order.get_cart_items}}</strong></h5></div>
                                 <div class="grid-child mx-auto my-auto"><h5>Total: <strong>Rp {{order.get_cart_totals}}</strong></h5></div>
                                 <div class="grid-child ml-auto my-auto">
-                                    <a id="btn-checkout" class="btn btn-outline-danger" href="{% url 'homey:checkout' %}">Checkout</a>
+                                    <a class="btn checkout btn-outline-danger" href="{% url 'homey:checkout' %}">Checkout</a>
+                                    <a class="btn checkout btn-outline-success" href="">Checkout Via Whatsapp</a>
                                 </div>
                             </div>
                 
@@ -121,7 +122,12 @@
     console.log(product)
 
     if(product=='0'){
-        document.getElementById('btn-checkout').classList.add('hidden');
+        var x = document.getElementsByClassName('checkout')
+        // Iterate through the retrieved elements and add the necessary class names.
+        for(var i = 0; i < x.length; i++){
+            x[i].classList.add('hidden');
+            console.log(x[i].className);
+        }
     }
     </script>
 

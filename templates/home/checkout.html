@@ -35,17 +35,11 @@
 					{% csrf_token %}
 					<div id="shipping-info">
 						<hr>
-						<p>Shipping Information:</p>
+						<p>Formulir Pengiriman:</p>
 						<hr>
 						<div class="form-field">
-							{{form.user}}
-							{{form.order}}
 							<p class="pl-1">Email:</p>
 							{{form.email}}
-						</div>
-						<div class="form-field">
-							<p class="pl-1 pt-1">Kode Pos:</p>
-							{{form.kode_pos}}
 						</div>
 						<div class="form-field">
 							<p class="pl-1 pt-1">Kota:</p>

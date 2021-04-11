@@ -99,7 +99,7 @@
         {% for product in product_list %}
             <div class="col-md-4 col-sm-6 col-6">
                 <figure class="card card-product-grid">
-                    <div class="img-wrap"> 
+                    <div class="img-wrap img-product"> 
                         <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL}}"></a>
                         <a class="btn-overlay" href="{% url 'homey:detail' product.slug %}"><i class="fa fa-search-plus"></i> Quick view</a>
                     </div> <!-- img-wrap.// -->

@@ -27,53 +27,58 @@
 
     <div class="row">
         <aside class="col-md-3 mt-4">
-            
-    <div class="card">
-        <article class="filter-group">
-            <div class="card-header d-flex flex-column">
-                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="false" class="">
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Category Products</h6>
-                </a>
-            </div>
-            <div class="filter-content collapse in" id="collapse_1" style="">
-                <div class="card-body">
-                    <ul class="list-menu">
-                        <li><a href="{% url 'homey:product'%}">All</a></li>
-                    {% for category in categories %}
-                        <li><a href="{% url 'homey:product'%}?category-id={{forloop.counter}}">{{category}}</a></li>
-                    {% endfor %}
-                        
-                    </ul>
+            <form method="GET">
+                <div class="card">
+                    <article class="filter-group">
+                        <div class="card-header d-flex flex-column">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="false" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Category Products</h6>
+                            </a>
+                        </div>
+                        <div class="filter-content collapse in" id="collapse_1" style="">
+                            <div class="card-body">
+                                {% for category in categories %}
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="radio" name="category" value="{{category.id}}" class="custom-control-input">
+                                        <div class="custom-control-label">{{category}}</div>
+                                    </label>
+                                {% endfor %} 
+                            </div> <!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group  .// -->
+                </div> <!-- card.// -->
 
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- filter-group  .// -->
-    </div> <!-- card.// -->
-
-    <div class="card">
-        <article class="filter-group">
-            <div class="card-header d-flex flex-column">
-                <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" class="">
-                    <i class="icon-control fa fa-chevron-down"></i>
-                    <h6 class="title">Filter</h6>
-                </a>
-            </div>
-            <div class="filter-content collapse in" id="collapse_2" style="">
-                <div class="card-body">
-                    <ul class="list-menu">
-                        <li><a name='list-terbaru' href="{% url 'homey:product'%}?order=-upload_time">Terbaru</a></li>
-                        <li><a name='list-termurah' href="{% url 'homey:product'%}?order=price">Termurah</a></li>
-                        <li><a name='list-termahal' href="{% url 'homey:product'%}?order=-price">Termahal</a></li>
-                    </ul>
-
-                </div> <!-- card-body.// -->
-            </div>
-        </article> <!-- filter-group  .// -->
-    </div> <!-- card.// -->
-
+                <div class="card">
+                    <article class="filter-group">
+                        <div class="card-header d-flex flex-column">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" class="">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">More Filter</h6>
+                            </a>
+                        </div>
+                        <div class="filter-content collapse in" id="collapse_2" style="">
+                            <div class="card-body">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" name="more-filter" value="-upload_time" class="custom-control-input">
+                                    <div class="custom-control-label">Terbaru</div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" name="more-filter" value="-price" class="custom-control-input">
+                                    <div class="custom-control-label">Termahal</div>
+                                </label>
+                                <label class="custom-control custom-checkbox">
+                                    <input type="radio" name="more-filter" value="price" class="custom-control-input">
+                                    <div class="custom-control-label">Termurah</div>
+                                </ul>
+                            </div> <!-- card-body.// -->
+                        </div>
+                    </article> <!-- filter-group  .// -->
+                </div> <!-- card.// -->
+                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+            </form>
         </aside> <!-- col.// -->
-        <main class="col-md-9 mt-4">
+    <main class="col-md-9 mt-4">
 
     <div class="row">
         <!--<div class="col-md-4">
@@ -139,7 +144,7 @@
     {% endif %}
     </nav>
 
-        </main> <!-- col.// -->
+    </main> <!-- col.// -->
 
     </div>
 

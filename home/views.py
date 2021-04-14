@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
-from .utils import cartData,CompleteOrder
+from .utils import cartData,CompleteOrder,whatsappLinkCheckout,whatsappLinkBuyNow
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponseRedirect
@@ -38,8 +38,9 @@ class HomeView(ListView):
     def get_ordering(self):
         request = self.request.GET
         if len(request) != 0:
-            ordering = [request["more-filter"]]
-            return ordering
+            if request == 'more-filter':
+                ordering = [request["more-filter"]]
+                return ordering
         
 
     def get_context_data(self,*args,**kwargs):
@@ -52,11 +53,17 @@ class HomeView(ListView):
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
         context['URL']=request.path#This Is For Get Current Url
+        context.update(whatsappLinkCheckout(self.request,context['items']))
         return context
 
 class ProductHome(DetailView):
     model = Product
     template_name = 'home/detail.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context.update(whatsappLinkBuyNow(self.request,context))
+        return context
+    
 
 # class FormShipping(CreateView):
 #     template_name = 'home/checkout.html'

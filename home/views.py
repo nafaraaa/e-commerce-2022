@@ -38,9 +38,12 @@ class HomeView(ListView):
     def get_ordering(self):
         request = self.request.GET
         if len(request) != 0:
-            if request == 'more-filter':
-                ordering = [request["more-filter"]]
-                return ordering
+            print(request)
+            for i in request: 
+                if i == 'more-filter':
+                    ordering = [request["more-filter"]]
+                    return ordering
+                    print('hi')
         
 
     def get_context_data(self,*args,**kwargs):
@@ -52,7 +55,7 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        context['URL']=request.path#This Is For Get Current Url
+        context['URL']='https://api.whatsapp.com/send?phone=6281388762268&text='#This Is For Get Current Url
         context.update(whatsappLinkCheckout(self.request,context['items']))
         return context
 

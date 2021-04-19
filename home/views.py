@@ -54,7 +54,7 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        paginationFilter(request)
+        context.update(paginationFilter(request))
         context.update(whatsappLinkCheckout(self.request,context['items']))
         return context
 

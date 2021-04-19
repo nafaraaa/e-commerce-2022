@@ -47,6 +47,10 @@ def whatsappLinkCheckout(request,context):
 
 def paginationFilter(request):
     full_path = request.get_full_path()
+    if request.GET != 0:
+        return {'path':full_path}
+
+    print(request.GET)
 
 def whatsappLinkBuyNow(request,context):
     product = context["object"]

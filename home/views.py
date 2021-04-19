@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
-from .utils import cartData,CompleteOrder,whatsappLinkCheckout,whatsappLinkBuyNow
+from .utils import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponseRedirect
@@ -38,7 +38,6 @@ class HomeView(ListView):
     def get_ordering(self):
         request = self.request.GET
         if len(request) != 0:
-            print(request)
             for i in request: 
                 if i == 'more-filter':
                     ordering = [request["more-filter"]]
@@ -55,7 +54,7 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        context['URL']='https://api.whatsapp.com/send?phone=6281388762268&text='#This Is For Get Current Url
+        paginationFilter(request)
         context.update(whatsappLinkCheckout(self.request,context['items']))
         return context
 

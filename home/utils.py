@@ -28,8 +28,7 @@ def CompleteOrder(request):
 
 base = 'https://api.whatsapp.com/send?phone=6281388762268&text='
 def whatsappLinkCheckout(request,context):
-    print(context,'hai')
-    if len(context) != 0 and context != 0 :
+    if len(context) != 0 and context == 0 :
         # context yg diambil adalah queryset dari list product yg dicheckout oleh pengguna
         productName = [item.product.title for item in context]
         productNumber = [item.quantity for item in context]
@@ -45,6 +44,9 @@ def whatsappLinkCheckout(request,context):
         return linked
     else:
         return {'link':'Failed'}
+
+def paginationFilter(request):
+    full_path = request.get_full_path()
 
 def whatsappLinkBuyNow(request,context):
     product = context["object"]

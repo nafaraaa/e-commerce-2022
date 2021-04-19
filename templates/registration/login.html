@@ -11,12 +11,11 @@
                   {% csrf_token %}
                   <div class="form-group">
                      <label>Username</label>
-                     <input name="username" class="form-control" type="text">
+                     {{form.username}}
                   </div> <!-- form-group// -->
                   <div class="form-group">
-                    <a class="float-right" href="#">Forgot</a>
                     <label>Password</label>
-                    <input class="form-control" placeholder="******" name="password" type="password">
+                    {{form.password}}
                   </div> <!-- form-group// --> 
                   <div class="form-group"> 
                     <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input" checked=""> <div class="custom-control-label"> Remember </div> </label>
@@ -25,9 +24,10 @@
                       <button type="submit" class="btn btn-primary btn-block"> Login  </button>
                   </div> <!-- form-group// -->
                   <div class="form-group">
-                        {% for message in messages %}
-                            <p>{{message}}</p>
-                        {% endfor %}
+                    <small style="color:red;">{{form.errors}}</small>
+                      {% for message in messages %}
+                          <small style="color:red;">{{message}}</small>
+                      {% endfor %}
                         
                   </div>    
               </form>

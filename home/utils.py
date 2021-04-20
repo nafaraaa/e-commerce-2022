@@ -28,10 +28,13 @@ def CompleteOrder(request):
 
 base = 'https://api.whatsapp.com/send?phone=6281388762268&text='
 def whatsappLinkCheckout(request,context):
-    if len(context) != 0 and context == 0 :
+    print(type(context),'oy')
+    print(len(context))
+    items = context
+    if len(context) > 1 or context == 0:
         # context yg diambil adalah queryset dari list product yg dicheckout oleh pengguna
-        productName = [item.product.title for item in context]
-        productNumber = [item.quantity for item in context]
+        productName = [item.product.title for item in items]
+        productNumber = [item.quantity for item in items]
         #Dua variable ini digunakan untuk menampung list nama product yg akan dibeli 
         
         title = ""
@@ -45,16 +48,31 @@ def whatsappLinkCheckout(request,context):
     else:
         return {'link':'Failed'}
 
+def checkUser(request):
+    userr = False
+    if str(request.user) == 'AnonymousUser':
+        userr = True
+        print(request.user)
+        return {'hai':'hai','is_user':'tidak ada'}
+    return {'hai':'hai'}
+
 def paginationFilter(request):
     full_path = request.get_full_path()
-    if request.GET != 0:
-        return {'path':full_path}
-
-    print(request.GET)
-
+    yolo = False
+    if len(request.GET) != 0:
+        yolo = True
+        return {'path':full_path,'aye':yolo}
+    return {'aye':yolo}
+    
 def whatsappLinkBuyNow(request,context):
     product = context["object"]
     textWA = f'Permisi Bu aryani Saya ingin memesan:%0A{product.title}%0AJumlahnya :%0ADikirim Ke :%0ACatatan :%0ASekian Terimakasih.'
     linked = {'link':base + textWA.replace(' ', '%20')}
-    print(linked['link'])
     return linked
+
+def mergeFunction(request,context):
+    dictionary = {}
+    dictionary.update(whatsappLinkCheckout(request,context))
+    dictionary.update(paginationFilter(request))
+    dictionary.update(checkUser(request))
+    return dictionary

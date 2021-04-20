@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
-from .utils import *
+from .utils import mergeFunction,whatsappLinkBuyNow,cartData
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponseRedirect
@@ -24,7 +24,6 @@ class HomeView(ListView):
     }
 
 # next(iter(request)) untuk mendapatkan key pertama di dictionary
-
     def get_queryset(self):
         request = self.request.GET
         if len(request) != 0:
@@ -34,7 +33,6 @@ class HomeView(ListView):
 
         return super().get_queryset()
 
-
     def get_ordering(self):
         request = self.request.GET
         if len(request) != 0:
@@ -43,19 +41,17 @@ class HomeView(ListView):
                     ordering = [request["more-filter"]]
                     return ordering
                     print('hi')
-        
 
     def get_context_data(self,*args,**kwargs):
         request = self.request
-        context = super().get_context_data()
+        context = super().get_context_data() 
         self.kwargs.update(self.extra_context)
         kwargs = self.kwargs
         if len(request.GET) != 0:
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        context.update(paginationFilter(request))
-        context.update(whatsappLinkCheckout(self.request,context['items']))
+        context.update(mergeFunction(request,context['items']))
         return context
 
 class ProductHome(DetailView):

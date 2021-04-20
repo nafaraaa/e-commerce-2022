@@ -100,7 +100,9 @@
                 </figcaption>
             </figure>
         </div> --><!-- col.// -->
-
+        
+        
+            
         {% for product in product_list %}
             <div class="col-md-4 col-sm-6 col-6">
                 <figure class="card card-product-grid">
@@ -115,13 +117,40 @@
                                 <span class="price">{{product.price}}</span>
                             </div> <!-- price-wrap.// -->
                         </div>
-                        <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-block btn-primary update-cart">Add to cart </a>  
+                        {% if is_user %}
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Add To Cart
+                            </button>
+                        {% else %}
+                            <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-block btn-primary update-cart">Add to cart </a>  
+                            
+                        {% endif %}
                     </figcaption>
                 </figure>
             </div> <!-- col.// -->
         {% endfor %}
     </div> <!-- row end.// -->
-
+    <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Log In Dibutuhkan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Agar Bisa Memasukkan Item Keranjang Anda Harus Login
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+            </div>
+            </div>
+        </div>
+        </div>
     
     {% if path %} <!-- Jika Ada Filter Maka... -->
         <nav class="mt-4" aria-label="Page navigation sample">
@@ -175,4 +204,9 @@
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
 {% endblock content %}
+
+{% block script %}
+    
+{% endblock script %}
+    
     

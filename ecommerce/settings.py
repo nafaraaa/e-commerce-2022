@@ -13,7 +13,7 @@ SECRET_KEY = '$^p+2(bqkc%0*mel2i3w8&zb$0ioj-v(ed&456c5k0viys#@r5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['aryani-shop.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['aryanishop.herokuapp.com','127.0.0.1']
 
 
 # Application definition

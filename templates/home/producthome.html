@@ -118,13 +118,13 @@
                             </div> <!-- price-wrap.// -->
                         </div>
                         {% if is_user %}
-                            <!-- Button trigger modal -->
+                        <!-- Jika user adalah anonymous maka -->
                             <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 Add To Cart
                             </button>
                         {% else %}
+                        <!-- Lain Jika user sudah log in -->
                             <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-block btn-primary update-cart">Add to cart </a>  
-                            
                         {% endif %}
                     </figcaption>
                 </figure>

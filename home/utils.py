@@ -28,8 +28,7 @@ def CompleteOrder(request):
 
 base = 'https://api.whatsapp.com/send?phone=6281388762268&text='
 def whatsappLinkCheckout(request,context):
-    print(type(context),'oy')
-    print(len(context))
+
     items = context
     if len(context) > 1 or context == 0:
         # context yg diambil adalah queryset dari list product yg dicheckout oleh pengguna

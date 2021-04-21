@@ -28,7 +28,6 @@ class HomeView(ListView):
         request = self.request.GET
         if len(request) != 0:
             if next(iter(request)) == 'category':
-                print(next(iter(request)),'oy')
                 self.queryset = Product.objects.filter(category_id=self.request.GET['category'])
 
         return super().get_queryset()
@@ -40,7 +39,6 @@ class HomeView(ListView):
                 if i == 'more-filter':
                     ordering = [request["more-filter"]]
                     return ordering
-                    print('hi')
 
     def get_context_data(self,*args,**kwargs):
         request = self.request

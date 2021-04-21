@@ -34,7 +34,6 @@ def loginPage(request):
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 		user = authenticate(request , username=username, password=password)
-
 		if not user or not user.is_active:# jika bukan termasuk user atau user tidak active
 			messages.error(request,'username or password not correct')
 			return redirect('login')

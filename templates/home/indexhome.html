@@ -51,7 +51,7 @@
 					      	<div class="card bg-dark">
 					        <img src="{% static 'sample1.png' %}" class="card-img opacity">
 						        <div class="card-img-overlay text-white">
-						          	<h5 class="card-title"><a href="" class="text-decoration-none">{{category.name}}</a></h5>
+						          	<h5 class="card-title"><a href="{% url 'homey:product' %}?category={{category.id}}" class="text-decoration-none">{{category.name}}</a></h5>
 						          	<p class="card-text">Category Card</p>
 						        </div>
 					      	</div> 

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from .models import *
 from .forms import FormShipping,FormLogIn,FormSignUp
 from .utils import mergeFunction,whatsappLinkBuyNow,cartData
@@ -8,11 +9,15 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 import json
 from django.views.generic import (
+        TemplateView,
         ListView,
         DetailView,
         FormView,
         CreateView,
     )
+
+# Apabila Melakukan 'model.objects.filter()' maka untuk mengabilnya diganakan forloop
+
 
 # Create your views here.
 class HomeView(ListView):
@@ -52,13 +57,27 @@ class HomeView(ListView):
         context.update(mergeFunction(request,context['items']))
         return context
 
-class ProductHome(DetailView):
+# class ProductHome(DetailView):
+#     model = Product
+#     template_name = 'home/detail.html'
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data()
+#         context.update(whatsappLinkBuyNow(self.request,context))
+#         return context
+
+class ProdukHome(TemplateView):
     model = Product
     template_name = 'home/detail.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context.update(whatsappLinkBuyNow(self.request,context))
+        exlude_object = Product.objects.exclude(slug=kwargs['slug'])
+        paginator = Paginator(exlude_object,4)
+        prod_list = paginator.get_page(None)
+        print(prod_list)
+        context['product'] = Product.objects.get(slug=kwargs['slug'])
+        context['product_list'] = prod_list
         return context
+    
     
 
 # class FormShipping(CreateView):

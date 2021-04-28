@@ -6,7 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Orelega+One&family=Roboto&family=Viga&display=swap" rel="stylesheet">
 	{% include "snippets/styles.html" %}
 	<link rel="stylesheet" href="{% static "ui.css" %}">
 	<link rel="stylesheet" href="{% static "style.css" %}">
@@ -48,8 +49,8 @@
 	<!-- NavBar -->
 	<nav class="navbar shadow fixed-top navbar-expand-sm navbar-light bg-light">
 		<div class="container">
-	  		<h2><a class="navbar-brand" href="{% url 'homey:index' %}">Aryani Shop</a></h2>
-	  		<a href="{% url 'homey:product' %}" class="text-decoration-none mr-auto" style="color:black;">Products</a>
+	  		<h2><a class="navbar-brand" style="font-size: 1.5rem;" href="{% url 'homey:index' %}">Aryani Shop</a></h2>
+	  		<a href="{% url 'homey:product' %}" class="text-decoration-none mr-auto" style="color:black;font-size: 1.2rem;font-weight: 600;">Products</a>
 	  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"></span>
 	  		</button>

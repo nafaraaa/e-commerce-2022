@@ -64,7 +64,7 @@ def paginationFilter(request):
     return {'aye':yolo}
     
 def whatsappLinkBuyNow(request,context):
-    product = context["object"]
+    product = context["product"]
     textWA = f'Permisi Bu aryani Saya ingin memesan:%0A{product.title}%0AJumlahnya :%0ADikirim Ke :%0ACatatan :%0ASekian Terimakasih.'
     linked = {'link':base + textWA.replace(' ', '%20')}
     return linked

@@ -2,6 +2,7 @@ body {
     background-color: rgba(168, 166, 166,.35);
 }
 
+
 .bg{
     background-color: rgba(0, 0, 0,0);
 }
@@ -74,7 +75,7 @@ img{
     display: inline-block;
     padding: 0.5rem 0 0.2rem;
     color: rgb(83, 52, 255);
-    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
     transition: all 500ms ease-in-out;
 }
   

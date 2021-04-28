@@ -1,5 +1,20 @@
 {% extends "base.html" %}
+{% block style %}
+<style>
+	.title-product{
+		font-size:1.1rem;
+        font-weight: 700;
+		color: black;
+        font-family: 'Roboto', sans-serif;
+	}
 
+	.price-product{
+		font-size: 1rem;
+        font-weight: 600;
+
+	}
+</style>
+{% endblock style %}
 {% block content %}
     <!-- ========================= SECTION PAGETOP ========================= -->
     <section class="section-pagetop bg under-nav ">
@@ -104,27 +119,27 @@
         
             
         {% for product in product_list %}
-            <div class="col-md-4 col-sm-6 col-6">
-                <figure class="card card-product-grid">
+            <div class="col-md-4 col-sm-6 col-6 p-1">
+                <figure class="card card-product-grid" style="height: 400px;">
                     <div class="img-wrap img-product"> 
                         <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL}}"></a>
                         <a class="btn-overlay" href="{% url 'homey:detail' product.slug %}"><i class="fa fa-search-plus"></i> Quick view</a>
                     </div> <!-- img-wrap.// -->
-                    <figcaption class="info-wrap">
+                    <figcaption class="info-wrap text-center ">
                         <div class="fix-height">
-                            <a href="{% url 'homey:detail' product.slug %}" class="title">{{product.title}}</a>
+                            <a href="{% url 'homey:detail' product.slug %}" class="title title-product text-decoration-none">{{product.title}}</a>
                             <div class="price-wrap mt-2">
-                                <span class="price">{{product.price}}</span>
+                                <span class="price price-product">Rp {{product.price}}</span>
                             </div> <!-- price-wrap.// -->
                         </div>
                         {% if is_user %}
                         <!-- Jika user adalah anonymous maka -->
-                            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            <button type="button" class="btn btn-block btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">
                                 Add To Cart
                             </button>
                         {% else %}
                         <!-- Lain Jika user sudah log in -->
-                            <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-block btn-primary update-cart">Add to cart </a>  
+                            <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-block btn-primary update-cart mt-2">Add to cart </a>  
                         {% endif %}
                     </figcaption>
                 </figure>

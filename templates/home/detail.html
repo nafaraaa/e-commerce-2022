@@ -2,6 +2,11 @@
 {% load static %}
 {% block style %}
 	<link rel="stylesheet" href="{% static 'breakpoints.css' %}">
+	<style>	
+		.title-a1{
+			font-size: 1.7rem;
+		}
+	</style>
 {% endblock style %}
 {% block content %}
 <section class="under-nav">
@@ -35,7 +40,7 @@
 						<p>Rating :</p>
 					</div>
 					<div class="row">
-						<h3 class="text-warning" width='80%'><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i></h3>
+						<h3 class="text-warning" width='80%'><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-half-o" aria-hidden="true"></i></h3>
 						&nbsp; &nbsp;
 					</div>
 					<div class="row mt-3" style="display: inline-block;">
@@ -45,7 +50,30 @@
 				</div>
 	        </div>
 	    </main>
+	</div>
+	<div class="container bg-light mt-2">
+		<h2 class="d-flex mx-auto"><a href="/product/" class="link-href mb-4 text-decoration-none title-a1">Produk Lain</a></h2>
+		<div class="row px-2">
+		{% for produk in product_list %}
+            <div class="col-md-3 col-sm-6 col-6 p-1">
+                <figure class="card card-product-grid" style="height: 300px;">
+                    <div class="img-wrap img-product"> 
+                        <a href="{% url 'homey:detail' produk.slug %}"><img src="{{produk.imageURL}}"></a>
+                        <a class="btn-overlay" href="{% url 'homey:detail' produk.slug %}"><i class="fa fa-search-plus"></i> Quick view</a>
+                    </div> <!-- img-wrap.// -->
+                    <figcaption class="info-wrap text-center ">
+                        <div class="fix-height">
+                            <a href="{% url 'homey:detail' produk.slug %}" class="title title-product text-decoration-none">{{product.title}}</a>
+                            <div class="price-wrap mt-2">
+                                <span class="price price-product pt-2">Rp {{produk.price}}</span>
+                            </div> <!-- price-wrap.// -->
+                        </div>
 
+                    </figcaption>
+                </figure>
+            </div> <!-- col.// -->
+        {% endfor %}
+		</div>
 	</div>
 </section>
 {% endblock content %}

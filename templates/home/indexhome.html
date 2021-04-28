@@ -2,6 +2,16 @@
 {% load static %}
 {% block style %}
 <style>
+	.title-product{
+		font-size:1.5rem;
+		font-weight: bold;
+		color: black;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	.price-product{
+		font-size: 1.2rem;
+	}
 </style>
 	
 {% endblock style %}
@@ -43,7 +53,7 @@
 
 	<section class="section-content"><!-- Section Kategori -->
 		<div class="container mt-4">
-			<h2 class="d-flex mx-auto"><a href="" class="link-href text-decoration-none">Kategori</a></h2>
+			<h2 class="d-flex mx-auto"><a href="/product/?more-filter=-price" class="link-href text-decoration-none">Kategori</a></h2>
 			<div class="row mt-4">
 			    {% for category in categories %}
 			    	<a href="#">
@@ -78,10 +88,10 @@
 					<div class="col-md-3 col-sm-6 kartu-produk">
 						<figure class="card card-product-grid mb-3">
 							<div class="img-wrap img-product"> <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL}}" class='img-product d-flex mx-auto'> </a></div>
-							<figcaption class="info-wrap">
-								<a href="{% url 'homey:detail' product.slug %}" class="title text-truncate">{{product.title}}</a>
-								<p class="price mb-2">Rp {{product.price}} </p>
-								<a href="" data-action='add' data-product='{{product.id}}' class="btn btn-primary btn-sm update-cart"> Add to cart </a>
+							<figcaption class="info-wrap text-center">
+								<a href="{% url 'homey:detail' product.slug %}" class="title-product text-decoration-none text-truncate">{{product.title}}</a>
+								<p class="price-product price mb-2">Rp {{product.price}} </p>
+								<a href="" data-action='add' data-product='{{product.id}}' class="btn btn-primary btn-lg update-cart"> Add to cart </a>
 							</figcaption>
 						</figure>
 					</div> <!-- col.// -->

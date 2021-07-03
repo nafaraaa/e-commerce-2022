@@ -22,7 +22,6 @@ def CompleteOrder(request):
     if request.user.is_authenticated:
         try:
             order = Order.objects.filter(id=cart['order'].id).update(complete=True)
-            print('sip')
         except :
             print('Asw')
 
@@ -47,14 +46,6 @@ def whatsappLinkCheckout(request,context):
     else:
         return {'link':'Failed'}
 
-def checkUser(request):
-    userr = False
-    if str(request.user) == 'AnonymousUser':
-        userr = True
-        print(request.user)
-        return {'hai':'hai','is_user':'tidak ada'}
-    return {'hai':'hai'}
-
 def paginationFilter(request):
     full_path = request.get_full_path()
     yolo = False
@@ -70,8 +61,8 @@ def whatsappLinkBuyNow(request,context):
     return linked
 
 def mergeFunction(request,context):
+    #run all whatsapp things
     dictionary = {}
     dictionary.update(whatsappLinkCheckout(request,context))
     dictionary.update(paginationFilter(request))
-    dictionary.update(checkUser(request))
     return dictionary

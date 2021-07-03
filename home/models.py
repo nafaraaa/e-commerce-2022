@@ -8,8 +8,18 @@ import random
 
 class Category(models.Model):
     name = models.CharField(max_length=200,unique=True)
+    logo_category = models.ImageField(null=True, blank=True,upload_to='logo/')
     slug = models.SlugField(max_length=200,blank=True)
     
+    @property
+    def imageURL(self):
+        try:
+            url = self.logo_category.url
+        except:
+            url = ''
+        return url
+
+
     class Meta:
         verbose_name_plural = 'Categories'
 

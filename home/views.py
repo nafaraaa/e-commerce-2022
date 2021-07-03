@@ -28,7 +28,7 @@ class HomeView(ListView):
         'categories':category
     }
 
-# next(iter(request)) untuk mendapatkan key pertama di dictionary
+    # next(iter(request)) untuk mendapatkan key pertama di dictionary
     def get_queryset(self):
         request = self.request.GET
         if len(request) != 0:
@@ -46,6 +46,7 @@ class HomeView(ListView):
                     return ordering
 
     def get_context_data(self,*args,**kwargs):
+        print(self.request)
         request = self.request
         context = super().get_context_data() 
         self.kwargs.update(self.extra_context)

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block style %}
-<link rel="stylesheet" href="{% static "style2.css" %}">
+<link rel="stylesheet" href="{% static 'style2.css' %}">
 	
 {% endblock style %}
 {% block content %}
@@ -13,7 +13,7 @@
                     <p class="jumbotron-text">
                         Hot Product<br>And More Discounts
                     </p>
-                    <a class="btn btn-light btn-jumbo" href="#" role="button">Check Now</a>
+                    <a class="btn btn-light btn-jumbo" href="/product" role="button">Check Now</a>
                 </div>
                 <div class="flex-items flex-2">
                     <img class='jumbotron-img ' src="{% static "Cloth.png" %}" alt="Cloth">
@@ -26,21 +26,21 @@
         
         <!-- Category Section Start -->
         
-        <div class="section-content">
+        <div class="section-content h-275">
             <div class="container-content">
                 <div class="d-flex flex-column w-100 top-section">
 					<div class="d-flex justify-content-between align-items-center w-100 font-rubik-bold">
 						<p class="link-href section-title purple-shadow">Categories</p>
 					</div>
 				</div>
-				{% for category in categories %}
-					<div class="d-flex flex-container mb-4">
-	                    <div class="flex-items-2">
-	                        <div class="circle circle-satu" style="background-image:url({{category.logo_category.url}})"></div>
-	                        <p class="text-center font-rubik-bold purple-shadow">{{category.name}}</p>
-	                    </div>
-	                </div>
-				{% endfor %}
+                <div class="d-flex flex-container mb-4 mt-3">
+                    {% for category in categories %}
+                        <div class="flex-items-2">
+                            <a href="{% url 'homey:product' %}?category={{category.id}}"><div class="circle circle-satu" style="background-image:url({{category.logo_category.url}})"></div></a>
+                            <p class="text-center font-rubik-bold purple-shadow">{{category.name}}</p>
+                        </div>
+                    {% endfor %}
+	            </div>
             </div>
         </div>
     
@@ -58,7 +58,7 @@
                             <span>See All.</span>
                         </a>
                     </div>
-                    <div class="row">
+                    <div class="row justify-content-center mt-3">
 						{% for product in product_list %}
 							<div class="col-md-3 col-sm-6 kartu-produk">
 								<figure class="card card-product-grid mb-3">

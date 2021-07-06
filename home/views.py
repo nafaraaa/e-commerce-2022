@@ -27,6 +27,7 @@ class HomeView(ListView):
     extra_context = {
         'categories':category
     }
+    
 
     # next(iter(request)) untuk mendapatkan key pertama di dictionary
     def get_queryset(self):
@@ -46,7 +47,6 @@ class HomeView(ListView):
                     return ordering
 
     def get_context_data(self,*args,**kwargs):
-        print(self.request)
         request = self.request
         context = super().get_context_data() 
         self.kwargs.update(self.extra_context)
@@ -55,7 +55,9 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        context.update(mergeFunction(request,context['items']))
+        print(context)
+        if context['items'] != "0":
+            context.update(mergeFunction(request,context['items']))
         return context
 
 # class ProductHome(DetailView):
@@ -74,9 +76,9 @@ class ProdukHome(TemplateView):
         exlude_object = Product.objects.exclude(slug=kwargs['slug'])
         paginator = Paginator(exlude_object,4)
         prod_list = paginator.get_page(None)
-        print(prod_list)
         context['product'] = Product.objects.get(slug=kwargs['slug'])
         context['product_list'] = prod_list
+        context.update(whatsappLinkBuyNow(self.request,context))
         return context
     
     

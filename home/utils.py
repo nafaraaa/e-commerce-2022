@@ -1,3 +1,4 @@
+from django.contrib.auth.models import update_last_login
 from .models import *
 
 
@@ -27,9 +28,8 @@ def CompleteOrder(request):
 
 base = 'https://api.whatsapp.com/send?phone=6281388762268&text='
 def whatsappLinkCheckout(request,context):
-
     items = context
-    if len(context) > 1 or context == 0:
+    if len(items) > 0:
         # context yg diambil adalah queryset dari list product yg dicheckout oleh pengguna
         productName = [item.product.title for item in items]
         productNumber = [item.quantity for item in items]

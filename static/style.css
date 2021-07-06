@@ -8,7 +8,7 @@ body {
 }
 
 .under-nav {
-    margin-top: 73px;
+    margin-top: 83px;
 }
 
 .section-pagetop {
@@ -143,6 +143,15 @@ img{
 
 *, *::before, *::after {
     box-sizing: border-box;
+}
+
+.card-product-grid {
+    border: 2px solid rgba(34, 35, 59, 0.4);
+    box-shadow: 1px 10px 20px -3px rgba(34, 35, 59, 0.2);
+}
+
+.card-product-grid:hover {
+    box-shadow: 1px 10px 20px -3px rgba(34, 35, 59, 0.4);
 }
 
 .card-product-grid .info-wrap {

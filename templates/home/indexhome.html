@@ -62,7 +62,7 @@
 						{% for product in product_list %}
 							<div class="col-md-3 col-sm-6 kartu-produk">
 								<figure class="card card-product-grid mb-3">
-									<div class="img-wrap img-product"> <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL}}" class='img-product d-flex mx-auto'> </a></div>
+									<div class="img-wrap img-product"> <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL1}}" class='img-product d-flex mx-auto'> </a></div>
 									<figcaption class="info-wrap text-center">
 										<a href="{% url 'homey:detail' product.slug %}" class="title-product text-decoration-none text-truncate">{{product.title}}</a>
 										<p class="price-product price mb-2">Rp {{product.price}} </p>

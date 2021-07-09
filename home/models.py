@@ -29,7 +29,8 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
     title = models.CharField(max_length=200,unique=True)
-    image_product = models.ImageField(null=True, blank=True,upload_to='images/')
+    image_product_1 = models.ImageField(null=True, blank=True,upload_to='images/')
+    image_product_2 = models.ImageField(null=True, blank=True,upload_to='images/')
     price = models.DecimalField(max_digits=7,decimal_places=3)
     description = models.TextField()
     upload_time = models.DateField(auto_now_add=True)
@@ -37,12 +38,20 @@ class Product(models.Model):
     slug = models.SlugField(blank= True)
 
     @property
-    def imageURL(self):
+    def imageURL1(self):
         try:
-            url = self.image_product.url
+            url_1 = self.image_product_1.url
         except:
-            url = ''
-        return url
+            url_1 = '/static/empty.png'
+        return url_1
+
+    @property
+    def imageURL2(self):
+        try:
+            url_2 = self.image_product_2.url
+        except:
+            url_2 = '/static/empty.png'
+        return url_2
 
     def save(self):
         self.slug = slugify(self.title)

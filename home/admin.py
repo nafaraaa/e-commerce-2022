@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ['name','slug']
@@ -9,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductsAdmin(admin.ModelAdmin):
-	list_display = ['title','price','upload_time','slug']
+	list_display = ['name','price','upload_time','slug']
 
 
 @admin.register(Order)
@@ -21,5 +21,3 @@ admin.site.register(OrderItem)
 @admin.register(ShippingAddress)
 class ProductsAdmin(admin.ModelAdmin):
 	list_display = ['user','order','address']
-
-

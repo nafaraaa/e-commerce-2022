@@ -31,7 +31,7 @@ def whatsappLinkCheckout(request,context):
     items = context
     if len(items) > 0:
         # context yg diambil adalah queryset dari list product yg dicheckout oleh pengguna
-        productName = [item.product.title for item in items]
+        productName = [item.product.name for item in items]
         productNumber = [item.quantity for item in items]
         #Dua variable ini digunakan untuk menampung list nama product yg akan dibeli 
         
@@ -56,7 +56,7 @@ def paginationFilter(request):
     
 def whatsappLinkBuyNow(request,context):
     product = context["product"]
-    textWA = f'Permisi Bu aryani Saya ingin memesan:%0A{product.title}%0AJumlahnya :%0ADikirim Ke :%0ACatatan :%0ASekian Terimakasih.'
+    textWA = f'Permisi Bu aryani Saya ingin memesan:%0A{product.name}%0AJumlahnya :%0ADikirim Ke :%0ACatatan :%0ASekian Terimakasih.'
     linked = {'link':base + textWA.replace(' ', '%20')}
     return linked
 

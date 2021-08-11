@@ -1,35 +1,24 @@
-from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
+from home import models
+from django.shortcuts import render
 from .models import *
-from .forms import FormShipping,FormLogIn,FormSignUp
-from .utils import mergeFunction,whatsappLinkBuyNow,cartData
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse_lazy
 import json
+from .utils import *
 from django.views.generic import (
-        TemplateView,
-        ListView,
-        DetailView,
-        FormView,
-        CreateView,
-    )
+    TemplateView,
+    DetailView,
+    ListView,
+)
 
-# Apabila Melakukan 'model.objects.filter()' maka untuk mengabilnya diganakan forloop
-
-
-# Create your views here.
 class HomeView(ListView):
-    model = Product
+    models = Product
     category = Category.objects.all()
-    queryset = model.objects.all()
+    queryset = models.objects.all()
     extra_context = {
-        'categories':category
+        'categories' : category
     }
     
-
-    # next(iter(request)) untuk mendapatkan key pertama di dictionary
     def get_queryset(self):
         request = self.request.GET
         if len(request) != 0:
@@ -55,42 +44,21 @@ class HomeView(ListView):
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
         context.update(cartData(self.request))
-        print(context)
         if context['items'] != "0":
             context.update(mergeFunction(request,context['items']))
         return context
 
-# class ProductHome(DetailView):
-#     model = Product
-#     template_name = 'home/detail.html'
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data()
-#         context.update(whatsappLinkBuyNow(self.request,context))
-#         return context
-
-class ProdukHome(TemplateView):
+class ProductDetail(TemplateView):
     model = Product
-    template_name = 'home/detail.html'
-    def get_context_data(self, **kwargs):
+    def get_context_data(self,**kwargs):
+        print(kwargs)
         context = super().get_context_data()
-        exlude_object = Product.objects.exclude(slug=kwargs['slug'])
-        paginator = Paginator(exlude_object,4)
+        exclude_object = Product.objects.exclude(slug=kwargs['slug'])
+        paginator = Paginator(exclude_object,4)
         prod_list = paginator.get_page(None)
-        context['product'] = Product.objects.get(slug=kwargs['slug'])
-        context['product_list'] = prod_list
-        context.update(whatsappLinkBuyNow(self.request,context))
+        context['product_list']=prod_list
+        context['product'] = self.model.objects.get(slug=kwargs['slug'])
         return context
-    
-    
-
-# class FormShipping(CreateView):
-#     template_name = 'home/checkout.html'
-#     form_class = FormShipping
-#     def get_context_data(self):
-#         context = super().get_context_data()
-#         context.update(cartData(self.request))
-#         print(context)
-#         return context
 
 @login_required
 def ShippingView(request):
@@ -114,7 +82,7 @@ def ShippingView(request):
             CompleteOrder(request)
             return redirect('homey:index')
     context['form']=form
-    return render(request, 'home/checkout.html', context)
+ 
 
 @login_required
 def updateItem(request):

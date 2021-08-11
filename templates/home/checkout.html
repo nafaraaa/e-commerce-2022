@@ -70,7 +70,7 @@
                     {% for item in items %}
         					<div class="col-4 pb-2 mb-2" style="border-bottom:2px solid rgba(0,0,0,0.5)"><img width="100px" src="{{ item.product.imageURL }}"></div>
                             <div class="col-8 pb-2 mb-2" style="border-bottom:2px solid rgba(0,0,0,0.5)">
-                                <h5>{{ item.product.title }}</h5>
+                                <h5>{{ item.product.name }}</h5>
                                 <p style="margin-bottom:0px;">Rp{{ item.product.price }}</p>
                                 <p>Quantity : {{ item.quantity }}</p>
                             </div>

@@ -13,7 +13,7 @@
                     <p class="jumbotron-text">
                         Hot Product<br>And More Discounts
                     </p>
-                    <a class="btn btn-light btn-jumbo" href="/product" role="button">Check Now</a>
+                    <a class="btn btn-light btn-jumbo" href="{% url 'homey:product' %}" role="button">Check Now</a>
                 </div>
                 <div class="flex-items flex-2">
                     <img class='jumbotron-img ' src="{% static "Cloth.png" %}" alt="Cloth">
@@ -64,7 +64,7 @@
 								<figure class="card card-product-grid mb-3">
 									<div class="img-wrap img-product"> <a href="{% url 'homey:detail' product.slug %}"><img src="{{product.imageURL1}}" class='img-product d-flex mx-auto'> </a></div>
 									<figcaption class="info-wrap text-center">
-										<a href="{% url 'homey:detail' product.slug %}" class="title-product text-decoration-none text-truncate">{{product.title}}</a>
+										<a href="{% url 'homey:detail' product.slug %}" class="title-product text-decoration-none text-truncate">{{product.name}}</a>
 										<p class="price-product price mb-2">Rp {{product.price}} </p>
 										<a href="" data-action='add' data-product='{{product.id}}' class="btn btn-primary btn-lg update-cart"> Add to cart </a>
 									</figcaption>

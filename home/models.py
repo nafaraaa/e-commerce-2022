@@ -1,16 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils.text import slugify
-from django import forms
-from django.urls import reverse
+from django.db.models.base import ModelState
+from django.contrib.auth.models import User
+from django.db.models.fields import NullBooleanField
 import random
-# Create your models here.
+from django.http import JsonResponse, HttpResponseRedirect
+
+
 
 class Category(models.Model):
-    name = models.CharField(max_length=200,unique=True)
-    logo_category = models.ImageField(null=True, blank=True,upload_to='logo/')
-    slug = models.SlugField(max_length=200,blank=True)
-    
+    name            = models.CharField(max_length=255)
+    logo_category   = models.ImageField(null=True,blank=True,upload_to='logo/')
+    slug            = models.SlugField(null=True,blank=True)
+
     @property
     def imageURL(self):
         try:
@@ -19,7 +21,6 @@ class Category(models.Model):
             url = ''
         return url
 
-
     class Meta:
         verbose_name_plural = 'Categories'
 
@@ -27,20 +28,21 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE)
-    title = models.CharField(max_length=200,unique=True)
-    image_product_1 = models.ImageField(null=True, blank=True,upload_to='images/')
-    image_product_2 = models.ImageField(null=True, blank=True,upload_to='images/')
-    price = models.DecimalField(max_digits=7,decimal_places=3)
-    description = models.TextField()
-    upload_time = models.DateField(auto_now_add=True)
-    stock = models.IntegerField(default=1)
-    slug = models.SlugField(blank= True)
+    category        = models.ForeignKey(Category,related_name='product', on_delete=models.CASCADE)
+    name            = models.CharField(max_length=255,unique=True)
+    img_product1    = models.ImageField(null=True,blank=True,upload_to='image/')
+    img_product2    = models.ImageField(null=True,blank=True,upload_to='image/')
+    old_price       = models.DecimalField(blank=True,null=True,max_digits=8,decimal_places=3)
+    price           = models.DecimalField(max_digits=8,decimal_places=3)
+    description     = models.TextField()
+    upload_time     = models.DateField(auto_now_add=True)
+    stock           = models.IntegerField(default=1)
+    slug            = models.SlugField(blank=True)
 
     @property
     def imageURL1(self):
         try:
-            url_1 = self.image_product_1.url
+            url_1 = self.img_product1.url
         except:
             url_1 = '/static/empty.png'
         return url_1
@@ -48,18 +50,17 @@ class Product(models.Model):
     @property
     def imageURL2(self):
         try:
-            url_2 = self.image_product_2.url
+            url_2 = self.img_product2.url
         except:
             url_2 = '/static/empty.png'
         return url_2
 
     def save(self):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.name)
         super(Product,self).save()
 
     def __str__(self):
-        return self.title
-
+        return self.name
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank= True)

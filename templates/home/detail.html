@@ -21,7 +21,7 @@
               <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
               <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             </ol>
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="max-width: 481px;">
               <div class="carousel-item active">
                 <img src="{{ product.imageURL1}}" class="d-block w-100" alt="...">
               </div>
@@ -41,7 +41,7 @@
         </div>
         <!-- card right -->
         <div class = "product-content">
-          <h2 class = "product-title">{{product.title}}</h2>
+          <h2 class = "product-title">{{product.name}}</h2>
           <div class = "product-rating">
             <i class = "fas fa-star"></i>
             <i class = "fas fa-star"></i>
@@ -53,22 +53,22 @@
 
           <div class = "product-price">
             <!-- <p class = "last-price">Old Price: <span>$257.00</span></p> -->
-            <p class = "new-price">New Price: <span class="price-span">Rp {{product.price}}</span></p>
+            <p class = "new-price">Harga: <span class="price-span">Rp {{product.price}}</span></p>
           </div>
 
           <div class = "product-detail">
-            <h2>about this item: </h2>
+            <h2>Tentang Produk : </h2>
             <p>{{product.description}}</p>
             <ul>
-              <li>Available: <span>in stock</span></li>
+              <li>Available: <span>{{product.stock}}</span></li>
               <li>Category: <span>{{product.category}}</span></li>
             </ul>
           </div>
 
           <div class = "purchase-info">
-            <a href="{{link}}" class="btn btn-success update-cart" style="font-size: 1rem;">Buy Now   <i class="fab fa-whatsapp"></i></a>
+            <a href="{{link}}" class="btn btn-success update-cart" style="font-size: 1rem;">Beli Sekarang   <i class="fab fa-whatsapp"></i></a>
             <a data-action='add' data-product='{{product.id}}' href="" class="btn btn-primary update-cart">
-              Add to Cart <i class = "fas fa-shopping-cart"></i>
+              Masukkan Keranjang <i class = "fas fa-shopping-cart"></i>
             </a>
 
           </div>
@@ -89,7 +89,7 @@
                 </div> <!-- img-wrap.// -->
                 <figcaption class="info-wrap text-center ">
                   <div class="fix-height">
-                    <a href="{% url 'homey:detail' produk.slug %}" class="title title-product text-decoration-none">{{produk.title}}</a>
+                    <a href="{% url 'homey:detail' produk.slug %}" class="title title-product text-decoration-none">{{produk.name}}</a>
                     <div class="price-wrap mt-2">
                       <span class="price price-product pt-2">Rp {{produk.price}}</span>
                     </div> <!-- price-wrap.// -->

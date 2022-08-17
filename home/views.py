@@ -4,6 +4,7 @@ from .models import *
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 import json
+import requests
 from .utils import *
 from django.views.generic import (
     TemplateView,
@@ -36,6 +37,7 @@ class HomeView(ListView):
                     return ordering
 
     def get_context_data(self,*args,**kwargs):
+        # response=requests.get('https://fakestoreapi.com/products').json()
         request = self.request
         context = super().get_context_data() 
         self.kwargs.update(self.extra_context)

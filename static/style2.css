@@ -88,12 +88,13 @@ body {
     flex-direction: row;
     margin-top: 15px;
     border-radius: 16px;
-    background-image:url('jumbotron.png');
+    background-image:url('jumbotron.jpg');
     border-style: solid;    
     border-width: 3px;
     background-repeat: no-repeat;
     min-height: 190px;
-    background-size: cover;
+    background-size: 100%;
+    background-position: top;
 }
 
 .jumbotron-text {
@@ -110,16 +111,6 @@ body {
     align-items: center;
 }
 
-.flex-items {
-    min-width: 120px;
-    max-width: 600px;
-    min-height: 230px;
-}
-
-.flex-items-2 {
-    width: 25%;
-    max-height: 105px;
-}
 
 .flex-1{
     margin-left: 10px;

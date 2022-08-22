@@ -37,7 +37,7 @@ class HomeView(ListView):
                     return ordering
 
     def get_context_data(self,*args,**kwargs):
-        # response=requests.get('https://fakestoreapi.com/products').json()
+        fakeStoreAPI()
         request = self.request
         context = super().get_context_data() 
         self.kwargs.update(self.extra_context)
@@ -85,6 +85,17 @@ def ShippingView(request):
             return redirect('homey:index')
     context['form']=form
  
+def fakeStoreAPI():
+    # This function will store data from api to django
+    responses=requests.get('https://fakestoreapi.com/products?limit=5').json()
+    for response in responses:
+        obj = Product()
+        try:
+            cat = Category.objects.get_or_create(name=response['category'])
+        except:
+            print('error gan')
+        del response['rating']
+        print(response,cat)
 
 @login_required
 def updateItem(request):

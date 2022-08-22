@@ -33,7 +33,7 @@
                 <div class="d-flex flex-container mb-4 mt-3">
                     {% for category in categories %}
                         <div class="flex-items-2">
-                            <a href="{% url 'homey:product' %}?category={{category.id}}"><div class="circle circle-satu" style="background-image:url({{category.logo_category.url}})"></div></a>
+                            <a href="{% url 'homey:product' %}?category={{category.id}}"><div class="circle circle-satu" style="background-image:url({{category.imageURL}})"></div></a>
                             <p class="text-center font-rubik-bold purple-shadow">{{category.name}}</p>
                         </div>
                     {% endfor %}

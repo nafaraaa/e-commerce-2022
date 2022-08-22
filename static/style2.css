@@ -145,11 +145,13 @@ body {
     border: 2px rgba(34, 35, 59, 0.4) solid;
     background-size: cover;
     background-position: center;
+    transition: .35s;
+
 }
 
 .circle:hover{
     border: 5px rgba(34, 35, 59, 0.19) solid;
-    box-shadow: 1px 10px 20px -3px rgba(34, 35, 59, 0.4);
+    box-shadow: 1px 10px 10px -3px rgba(34, 35, 59, 0.4);
 
 }
 

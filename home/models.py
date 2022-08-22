@@ -9,7 +9,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 
 
 class Category(models.Model):
-    name            = models.CharField(max_length=255)
+    name            = models.CharField(max_length=255,unique=True)
     logo_category   = models.ImageField(null=True,blank=True,upload_to='logo/')
     slug            = models.SlugField(null=True,blank=True)
 

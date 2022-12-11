@@ -111,7 +111,7 @@
                         </div>
                     </div>
                     <br>
-                    <table class="table shadow text-center">
+                    <table class="table shadow text-center" id="table-product">
                         <thead class="thead bg-blue">
                             <tr>
                                 <th width="300px" scope="col">Product</th>
@@ -123,7 +123,7 @@
                             {% for item in items %}
                                 <tr>
                                     <td class="cart-info" style="vertical-align: middle;">
-                                        <img width="80px" src="{{item.product.imageURL1}}" alt="">
+                                        <img width="80px" src="{{item.product.imageThumbnail}}" alt="">
                                         <p class="pt-2 pl-2 mr-auto">{{item.product.name}}</p>
                                     </td>
                                     <td style="vertical-align: middle;">{{item.product.price}}</td>
@@ -160,6 +160,7 @@
     }
     if(user == 'AnonymousUser'){
         document.getElementById('alerts').classList.remove('hidden')
+        document.getElementById('table-product').classList.add('hidden')
     }
     </script>
 

@@ -30,8 +30,6 @@ class Category(models.Model):
 class Product(models.Model):
     category        = models.ForeignKey(Category,related_name='product', on_delete=models.CASCADE)
     name            = models.CharField(max_length=255,unique=True)
-    img_product1    = models.ImageField(null=True,blank=True,upload_to='image/')
-    img_product2    = models.ImageField(null=True,blank=True,upload_to='image/')
     old_price       = models.DecimalField(blank=True,null=True,max_digits=8,decimal_places=3)
     price           = models.DecimalField(max_digits=8,decimal_places=3)
     description     = models.TextField()
@@ -40,27 +38,33 @@ class Product(models.Model):
     slug            = models.SlugField(blank=True)
 
     @property
-    def imageURL1(self):
-        try:
-            url_1 = self.img_product1.url
-        except:
-            url_1 = '/static/empty.png'
-        return url_1
+    def imageThumbnail(self):
+        images = ProductImage.objects.filter(product=self.pk)
+        return images[0].imageURL
 
-    @property
-    def imageURL2(self):
-        try:
-            url_2 = self.img_product2.url
-        except:
-            url_2 = '/static/empty.png'
-        return url_2
-
-    def save(self):
+    def save(self,*args,**kwargs):
+        # put args for avoiding error force_insert
         self.slug = slugify(self.name)
         super(Product,self).save()
 
     def __str__(self):
         return self.name
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(null=True,blank=False,upload_to='images/')
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = '/static/empty.png'
+        return url
+
+    def __str__(self):
+        return self.product.name
+
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank= True)

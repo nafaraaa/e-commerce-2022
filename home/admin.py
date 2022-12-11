@@ -17,6 +17,7 @@ class ProductsAdmin(admin.ModelAdmin):
 	list_display = ['user','id','date_order','transaction_id']
 
 admin.site.register(OrderItem)
+admin.site.register(ProductImage)
 
 @admin.register(ShippingAddress)
 class ProductsAdmin(admin.ModelAdmin):

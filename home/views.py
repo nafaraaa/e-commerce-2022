@@ -37,11 +37,15 @@ class HomeView(ListView):
                     return ordering
 
     def get_context_data(self,*args,**kwargs):
-        fakeStoreAPI()
+        # fakeStoreAPI()
         request = self.request
-        context = super().get_context_data() 
+        context = super().get_context_data()
+        # print("bum",context,"bum") 
         self.kwargs.update(self.extra_context)
         kwargs = self.kwargs
+        for product in context["product_list"]:
+            product_images = ProductImage.objects.filter(product=product.pk)
+            print(product_images)
         if len(request.GET) != 0:
             if next(iter(request.GET)) == 'category-id':
                 context['active'] = Category.objects.get(id=request.GET['category-id'])
@@ -53,13 +57,18 @@ class HomeView(ListView):
 class ProductDetail(TemplateView):
     model = Product
     def get_context_data(self,**kwargs):
-        print(kwargs)
         context = super().get_context_data()
+        context['product'] = self.model.objects.get(slug=kwargs['slug'])
+
+        product_images = ProductImage.objects.filter(product=context['product'].pk)
+        for image in product_images:
+            print(image.imageURL)
+
+        context["prod_images"] = product_images
         exclude_object = Product.objects.exclude(slug=kwargs['slug'])
         paginator = Paginator(exclude_object,4)
         prod_list = paginator.get_page(None)
         context['product_list']=prod_list
-        context['product'] = self.model.objects.get(slug=kwargs['slug'])
         return context
 
 @login_required
@@ -86,16 +95,27 @@ def ShippingView(request):
     context['form']=form
  
 def fakeStoreAPI():
-    # This function will store data from api to django
+    # This function will store data from api to django.
     responses=requests.get('https://fakestoreapi.com/products?limit=5').json()
+
     for response in responses:
-        obj = Product()
-        try:
-            cat = Category.objects.get_or_create(name=response['category'])
-        except:
-            print('error gan')
-        del response['rating']
-        print(response,cat)
+        category = Category.objects
+        obj = Product.objects.create(
+            category=Category.objects.get(name=response['category']),
+            name=response['title'],
+            img_product1=response['image'],
+            price=response['price'],
+            description=response['description']
+        )
+        obj.save()
+        # try:
+        #     cat,created = Category.objects.get_or_create(name=response['category'])
+
+        #     print('mantap gann!')
+        # except:
+        #     print('error gan')
+    print('sipp')
+
 
 @login_required
 def updateItem(request):

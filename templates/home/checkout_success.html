@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+<h2>Thank You {{ name }}!</h2>
+<p>Your order is being processed..</p>
+<a href="/">Back to Homepage</a>
+
+{% block content %}
+<div class="container mt-5">
+  <div class="text-center p-5 bg-white shadow rounded">
+    <h2 class="mb-4 text-success">🎉 Pembayaran Diterima!</h2>
+    <p>Thank you, Your order is being processed.</p>
+    <p>We will contact you via email or WhatsApp for delivery confirmation..</p>
+    <a href="{% url 'homey:product' %}" class="btn btn-primary mt-3">Kembali Belanja</a>
+  </div>
+</div>
+{% endblock content %}

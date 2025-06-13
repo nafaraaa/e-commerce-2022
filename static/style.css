@@ -31,7 +31,7 @@ img{
   	word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 0.37rem;
 }
 
@@ -74,7 +74,7 @@ img{
     position: relative;
     display: inline-block;
     padding: 0.5rem 0 0.2rem;
-    color: rgb(83, 52, 255);
+    color: rgb(58, 36, 200);
     font-family: 'Roboto', sans-serif;
     transition: all 500ms ease-in-out;
 }

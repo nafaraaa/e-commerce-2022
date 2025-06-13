@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 	
 class FormLogIn(forms.ModelForm):
@@ -67,7 +69,7 @@ class FormSignUp(UserCreationForm):
 			'username',
 			'email',
 			'password1',
-			'password2'
+			'password2',
 		)	
 		widgets = {
 			'username':forms.TextInput(
@@ -75,7 +77,7 @@ class FormSignUp(UserCreationForm):
 					'class':"form-control mb-3",
 				}
 			),
-			'email':forms.TextInput(
+			'email':forms.EmailInput(
 				attrs={
 					'class':"form-control mb-3",
 					'placeholder':"ex. name@gmail.com",
@@ -83,3 +85,12 @@ class FormSignUp(UserCreationForm):
 				}
 			),
 		}
+	def clean_email(self):
+		email = self.cleaned_data.get('email')
+		if User.objects.filter(email=email).exists():
+			raise forms.ValidationError("Email sudah terdaftar.")
+		try:
+			validate_email(email)
+		except ValidationError:
+			raise forms.ValidationError("Format Email tidak valid.")
+		return email

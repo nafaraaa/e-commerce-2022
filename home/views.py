@@ -1,3 +1,5 @@
+from django.shortcuts import render, redirect
+from .forms import FormShipping
 from home import models
 from django.shortcuts import render
 from .models import *
@@ -85,15 +87,30 @@ def ShippingView(request):
                 user=customer,
                 order=context['order'],
                 email=request.POST.get('email'),
-                kode_pos=request.POST.get('kode_pos'),
                 kota=request.POST.get('kota'),
                 address=request.POST.get('address'),
             )         
             shipping.save()
             CompleteOrder(request)
-            return redirect('homey:index')
+            return redirect('homey:checkout-success')
     context['form']=form
- 
+    return render(request, 'home/checkout.html', context)
+print(">>> MASUK KE SHIPPING VIEW <<<")
+
+from django.contrib import messages
+
+@login_required
+def payment_confirm(request):
+    if request.method == 'POST':
+        # bisa update order jadi "Menunggu Konfirmasi" kalau mau
+        messages.success(request, 'Pembayaran dikonfirmasi! Order kamu akan segera diproses.')
+        return redirect('homey:index')
+    
+def payment_success(request):
+    return render(request, 'home/checkout_success.html')
+  
+
+
 def fakeStoreAPI():
     # This function will store data from api to django.
     responses=requests.get('https://fakestoreapi.com/products?limit=5').json()

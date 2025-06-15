@@ -1,0 +1,14 @@
+{% extends "home/base.html" %}
+{% block content %}
+<h2>Update Status Pengaduan</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>Status:</label>
+    <select name="status">
+        {% for key, val in pengaduan.STATUS_PENGADUAN %}
+        <option value="{{ key }}" {% if key == pengaduan.status %}selected{% endif %}>{{ val }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Simpan</button>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Kirim Pengaduan</h2>
+<form method="POST">
+    {% csrf_token %}
+    <label for="judul">Judul:</label><br>
+    <input type="text" name="judul" required><br><br>
+
+    <label for="isi">Isi Pengaduan:</label><br>
+    <textarea name="isi" required></textarea><br><br>
+
+    <label for="order_id">Terkait Pesanan:</label><br>
+    <select name="order_id">
+        {% for order in orders %}
+            <option value="{{ order.id }}">Order #{{ order.id }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Kirim!</button>
+</form>
+{% endblock %}

@@ -164,6 +164,7 @@ img{
     font-size: 0.82rem;
     line-height: 1.2;
     border-radius: 0.37rem;
+}
 
 [class*=card-product] a.title {
     color: #212529;

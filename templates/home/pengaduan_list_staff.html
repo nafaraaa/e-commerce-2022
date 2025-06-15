@@ -1,0 +1,22 @@
+{% extends "home/base.html" %}
+{% block content %}
+<h2>Daftar Pengaduan Masuk</h2>
+<table>
+    <tr>
+        <th>Judul</th>
+        <th>User</th>
+        <th>Tanggal</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
+    {% for p in pengaduan %}
+    <tr>
+        <td>{{ p.judul }}</td>
+        <td>{{ p.user.username }}</td>
+        <td>{{ p.tanggal }}</td>
+        <td>{{ p.get_status_display }}</td>
+        <td><a href="{% url 'homey:update_status_pengaduan' p.id %}">Update</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

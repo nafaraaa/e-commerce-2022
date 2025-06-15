@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Daftar Pengaduan Kamu</h2>
+<ul>
+    {% for aduan in laporan %}
+        <li>
+            <strong>{{ aduan.judul }}</strong> - {{ aduan.status }} <br>
+            {{ aduan.isi }} <br>
+            <small>{{ aduan.tanggal }}</small>
+        </li>
+    {% empty %}
+        <li>Belum ada pengaduan</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'homey:tambah_pengaduan' %}">Tambah Pengaduan</a>
+{% endblock %}

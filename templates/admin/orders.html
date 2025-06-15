@@ -1,0 +1,8 @@
+<h2>Order List</h2>
+{% for order in orders %}
+  <div>
+    <strong>{{ order.produk }}</strong> - {{ order.user.username }}<br>
+    Status: {{ order.get_status_pengiriman_display }}<br>
+    <a href="{% url 'update_status_pesanan' order.id %}">Update Status</a>
+  </div><hr>
+{% endfor %}

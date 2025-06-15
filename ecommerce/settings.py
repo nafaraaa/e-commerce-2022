@@ -157,3 +157,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'romdhoniroyhan21@gmail.com'
 EMAIL_HOST_PASSWORD = 'qqrh ginj tgna wwqk '
+
+LOGIN_REDIRECT_URL = '/pengaduan/'  # Bisa juga pake:
+# LOGIN_REDIRECT_URL = reverse_lazy('homey:list_pengaduan_user') kalau pakai reverse
